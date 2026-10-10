@@ -1,2 +1,2 @@
-component_id,function,manufacturer,model,manufacturer_reference,supplier,supplier_reference,quantity_per_node,quantity_unit,hardware_revision,validation_status,product_url,notes
-HW-OPT-001,Capteur de particules,DFRobot,SEN0460,SEN0460,Farnell,3974148,1,pièce,draft,option non retenue,https://fr.farnell.com/dfrobot/sen0460/module-capteur-de-qualit-de-l/dp/3974148,I2C ; PM1.0 / PM2.5 / PM10 ; hors baseline sauf demande explicite
+component_id,function,manufacturer,model,manufacturer_reference,supplier,supplier_reference,quantity_per_node,quantity_unit,hardware_revision,validation_status,documentation_url,product_url,notes
+HW-OPT-001,Capteur de particules,DFRobot,SEN0460,SEN0460,Farnell,3974148,1,pièce,draft,option non retenue,https://wiki.dfrobot.com/sen0460,https://fr.farnell.com/dfrobot/sen0460/module-capteur-de-qualit-de-l/dp/3974148,I2C ; PM1.0 / PM2.5 / PM10 ; hors baseline sauf demande explicite

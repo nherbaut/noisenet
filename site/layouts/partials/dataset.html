@@ -1,17 +1,19 @@
 {{ $name := .Params.dataset }}
 {{ $data := index hugo.Data.hardware $name }}
+{{ $fields := slice }}
+{{ range $data.fields }}{{ if not (in (slice "product_url" "documentation_url") .) }}{{ $fields = $fields | append . }}{{ end }}{{ end }}
 {{ $labels := dict "component_id" "Composant" "function" "Fonction" "manufacturer" "Fabricant" "model" "Modèle" "manufacturer_reference" "Réf. fabricant" "supplier" "Fournisseur" "supplier_reference" "Réf. fournisseur" "quantity_per_node" "Qté / station" "quantity_unit" "Unité" "hardware_revision" "Révision" "validation_status" "Validation" "product_url" "Produit" "notes" "Notes" }}
 <p>{{ len $data.rows }} entrée(s) · <a href="{{ printf "data/hardware/%s.csv" $name | relURL }}" download>Télécharger le CSV</a></p>
 {{ if $data.rows }}
 <div class="table-scroll" role="region" aria-label="{{ .Title }}" tabindex="0">
 <table>
-  <thead><tr>{{ range $data.fields }}<th scope="col">{{ index $labels . | default . }}</th>{{ end }}</tr></thead>
+  <thead><tr>{{ range $fields }}<th scope="col">{{ index $labels . | default . }}</th>{{ end }}</tr></thead>
   <tbody>
     {{ range $data.rows }}
     {{ $row := . }}
-    <tr>{{ range $data.fields }}
+    <tr>{{ range $fields }}
       {{ $value := index $row . }}
-      <td>{{ if and (eq . "product_url") (hasPrefix $value "https://") }}<a href="{{ $value }}">Page produit ↗</a>{{ else }}{{ $value }}{{ end }}</td>
+      <td>{{ partial "hardware-cell.html" (dict "field" . "value" $value "row" $row) }}</td>
     {{ end }}</tr>
     {{ end }}
   </tbody>

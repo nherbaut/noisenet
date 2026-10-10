@@ -36,6 +36,42 @@ def route(source):
     return '/' + target.with_suffix('').as_posix().lower() + '/'
 
 
+def hardware_table_links(text, components):
+    """Link manufacturer/part and supplier cells in source Markdown tables."""
+    headers = []
+    fenced = False
+    lines = []
+    for line in text.splitlines(keepends=True):
+        if line.lstrip().startswith('```'):
+            fenced = not fenced
+        if fenced or not line.startswith('|'):
+            headers = []
+            lines.append(line)
+            continue
+        cells = [cell.strip() for cell in line.strip().split('|')[1:-1]]
+        if any(cell.lower() in ('supplier / reference', 'reference', 'fournisseur', 'supplier') for cell in cells):
+            headers = [cell.lower() for cell in cells]
+        elif headers and len(headers) == len(cells):
+            supplier_columns = [i for i, header in enumerate(headers)
+                                if header in ('supplier / reference', 'reference', 'fournisseur', 'supplier')]
+            for i in supplier_columns:
+                match = re.fullmatch(r'(Farnell|RS) (\d+)', cells[i])
+                if not match:
+                    continue
+                component = next((row for row in components.values()
+                                  if row['supplier'] == match[1] and row['supplier_reference'] == match[2]), None)
+                if not component:
+                    continue
+                if component['product_url'].startswith('https://'):
+                    cells[i] = f'[{cells[i]}]({component["product_url"]})'
+                for j, header in enumerate(headers):
+                    if header in ('part', 'fabricant', 'manufacturer') and '[' not in cells[j] and component['documentation_url'].startswith('https://'):
+                        cells[j] = f'[{cells[j]}]({component["documentation_url"]})'
+                line = '| ' + ' | '.join(cells) + ' |\n'
+        lines.append(line)
+    return ''.join(lines)
+
+
 def prepare():
     # Only this generated subtree is replaced, never the source documents.
     if OUTPUT.exists():
@@ -63,6 +99,9 @@ def prepare():
         destination.parent.mkdir(parents=True, exist_ok=True)
         shutil.copyfile(ROOT / source, destination)
     write(OUTPUT / 'data/hardware.json', json.dumps(datasets, ensure_ascii=False, indent=2))
+    components = {row['component_id']: row for name in ('bom', 'optional-bom')
+                  for row in datasets[name]['rows']}
+    write(OUTPUT / 'data/components.json', json.dumps(components, ensure_ascii=False, indent=2))
 
     def link(source, match):
         destination = match.group(2)
@@ -91,6 +130,7 @@ def prepare():
 
     for source in sources:
         text = (ROOT / source).read_text(encoding='utf-8')
+        text = hardware_table_links(text, components)
         heading = re.search(r'^# (.+)$', text, re.MULTILINE)
         title = heading.group(1) if heading else source.stem
         if heading:

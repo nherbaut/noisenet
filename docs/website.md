@@ -13,6 +13,8 @@ Le site compilé est dans `public/`. L'aperçu est disponible sur `http://localh
 
 Le script `scripts/prepare-site.py` transforme les Markdown du projet en contenu Hugo et les quatre CSV de matériel en tableaux HTML avec téléchargement CSV. Les sources restent dans leurs emplacements habituels ; `.build/site/` et `public/` sont générés et ignorés par Git.
 
+Dans les tableaux de matériel, cliquer sur un fabricant ouvre sa documentation et cliquer sur un fournisseur ouvre la page d'achat du composant. Les liens viennent des colonnes `documentation_url` et `product_url` de la BOM ; les URL inconnues restent sans lien. Cette présentation s'applique aussi aux tableaux de nomenclature Markdown générés depuis AGENTS.md.
+
 Après modification d'un Markdown ou CSV, relancer `make site-prepare` dans un autre terminal pour actualiser l'aperçu. Hugo surveille ensuite les fichiers générés. Les modifications des templates et du CSS sont prises en compte directement.
 
 ## Publier plus tard sur GitHub Pages
