@@ -1,0 +1,1 @@
+measurement_id,date,node_id,hardware_revision,firmware_commit,reference_meter,reference_level_db,sensor_voltage_v,sensor_level_db,corrected_level_db,duration_s,conditions,notes

@@ -1,0 +1,12 @@
+{
+  "node_id": null,
+  "hardware_revision": null,
+  "firmware_commit": null,
+  "status": "not_calibrated",
+  "date": null,
+  "model": "L_corrected = a * L_sensor + b",
+  "a": null,
+  "b": null,
+  "validated_range_db": null,
+  "report": null
+}

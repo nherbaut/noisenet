@@ -1,0 +1,10 @@
+component_id,function,manufacturer,model,supplier,supplier_reference,quantity_per_node,hardware_revision,validation_status,notes
+HW-001,MCU,Raspberry Pi,Pico 2,Farnell,4531086,1,draft,à vérifier,Contrôleur principal
+HW-002,Capteur sonore,DFRobot,SEN0232,Farnell,3517935,1,draft,à vérifier,Sortie analogique ; alimentation 3V3 prévue
+HW-003,Radio LoRaWAN,Seeed Studio,Grove Wio-E5 EU868,Farnell,4007875,1,draft,à vérifier,UART et commandes AT ; vérifier alimentation et antenne incluse
+HW-004,Système solaire,DFRobot,KIT0210 10 W / 18 V,Farnell,4829811,1,draft,à vérifier,Vérifier sorties régulées et connecteurs
+HW-005,Cellule Li-ion,RS PRO,18650 3.6 V 3500 mAh,RS,0206038,3,draft,à vérifier,Trois cellules neuves identiques ; vérifier dimensions et spécifications de charge
+HW-006,Boîtier,Hammond,1555F2F42GY,Farnell,1829810,1,draft,à vérifier,Vérifier protection IP et implantation mécanique
+HW-007,Diode Schottky,,SS14,Farnell,2675133,1,draft,à vérifier,Entre 5 V régulé externe et VSYS ; vérifier boîtier et montage
+HW-008,Membrane acoustique,,À sélectionner,,,1,draft,à sélectionner,Hydrophobe et adaptée au microphone ; réponse acoustique documentée
+HW-009,Antenne LoRa,,EU868,,,1,draft,à vérifier,Vérifier inclusion avec Wio-E5 et compatibilité du connecteur
