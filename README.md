@@ -13,6 +13,7 @@ Architecture de référence : Pico 2, SEN0232, Grove Wio-E5 et KIT0210 avec troi
 | Besoin | Fichier ou dossier |
 |---|---|
 | Matériel prévu pour une station | [Nomenclature](hardware/bom.csv) |
+| Matériel optionnel hors baseline | [Options](hardware/optional-bom.csv) |
 | Commandes et réceptions | [Achats](hardware/procurement.csv) |
 | Matériel disponible et affectation | [Inventaire](hardware/inventory.csv) |
 | Sources techniques | [Fiches techniques](hardware/datasheets/README.md) |
@@ -33,6 +34,7 @@ Architecture de référence : Pico 2, SEN0232, Grove Wio-E5 et KIT0210 avec troi
 - [ ] Vérifier l'alimentation, les niveaux UART et l'antenne du Grove Wio-E5.
 - [ ] Choisir les broches UART et le circuit de mesure de la batterie.
 - [ ] Compléter les connecteurs, câbles, fixations et presse-étoupes dans la BOM.
+- [ ] Définir la fixation directe du Pico et du Wio-E5 par petites bandes de VHB 5952, et la fixation finale du SEN0232 aligné sur l'ouverture acoustique.
 - [ ] Valider le câblage, puis enregistrer les achats et réceptions.
 - [ ] Assembler une première station et effectuer les essais électriques et acoustiques.
 

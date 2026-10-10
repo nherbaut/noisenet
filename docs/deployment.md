@@ -6,6 +6,7 @@
 - [ ] Valider les essais électriques, radio, acoustiques et extérieurs.
 - [ ] Enregistrer la calibration de la station assemblée.
 - [ ] Vérifier étanchéité du montage, fixation, chemin acoustique et dégagement de l'antenne.
+- [ ] Vérifier la tenue des petites bandes de VHB et l'alignement du microphone après la fixation finale du SEN0232 ; aucun adhésif sur son port.
 - [ ] Vérifier exposition du panneau et protection de la batterie contre la chaleur.
 - [ ] Vérifier le comportement de charge aux températures attendues.
 - [ ] Configurer LoRaWAN EU868 / OTAA et confirmer la réception des résumés binaires.

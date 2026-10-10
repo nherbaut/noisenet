@@ -1,6 +1,6 @@
 # Calibration
 
-Calibrer chaque station après montage du boîtier, de la membrane, de la cavité et de la protection pluie. Ne pas attribuer une précision garantie ou une conformité normative sans validation de la chaîne complète.
+Calibrer chaque station après montage du boîtier, de la membrane, de la cavité, de la protection pluie et de la fixation finale du SEN0232. Le microphone doit rester aligné avec l'ouverture et son port doit rester sans adhésif. Ne pas attribuer une précision garantie ou une conformité normative sans validation de la chaîne complète.
 
 ## Procédure initiale
 

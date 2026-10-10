@@ -1,0 +1,14 @@
+# Secrets et configuration locale
+.env
+.env.*
+!.env.example
+config/local/
+**/secrets.*
+
+# Sorties de compilation et outils
+build/
+.build/
+__pycache__/
+*.pyc
+.DS_Store
+*~

@@ -17,25 +17,26 @@ The system should operate autonomously from solar power, charge its battery duri
 
 ## Baseline BOM
 
-| Function | Part | Supplier / reference | Qty. | Notes |
-|---|---|---|---:|---|
-| MCU | Raspberry Pi Pico 2 | Farnell 4531086 | 1 | Main controller |
-| Sound-level sensor | DFRobot SEN0232 | Farnell 3517935 | 1 | Analog output, 30–130 dBA nominal range |
-| LoRaWAN radio | Seeed Studio Grove Wio-E5, EU868 | Farnell 4007875 | 1 | UART/AT-command interface |
-| Solar power system | DFRobot KIT0210, 10 W / 18 V | Farnell 4829811 | 1 | Solar panel, controller, cabling, outdoor accessories |
-| Battery cells | RS PRO 18650, 3.6 V, 3500 mAh | RS 0206038 | 3 | Use three identical new cells; verify mechanical compatibility before ordering |
-| Electronics enclosure | Hammond 1555F2F42GY, IP-rated polycarbonate | Farnell 1829810 | 1 | Light-coloured enclosure preferred outdoors |
-| Power isolation diode | SS14 Schottky diode | Farnell 2675133 | 1 | Between external 5 V supply and Pico VSYS |
-| Acoustic vent | Hydrophobic microphone-rated acoustic membrane | TBD | 1 | Must have documented acoustic insertion loss / frequency response |
-| LoRa antenna | EU868 antenna | Included with Wio-E5 or compatible external antenna | 1 | Keep clear of enclosure shielding |
+| Function | Part | Supplier / reference | Qty. | Product URL | Notes |
+|---|---|---|---:|---|---|
+| MCU | Raspberry Pi Pico 2 | Farnell 4531086 | 1 | [Farnell product page](https://fr.farnell.com/raspberry-pi/raspberry-pi-pico-2/carte-mcu-rpi-pico-2-520ko-150mhz/dp/4531086) | Main controller |
+| Sound-level sensor | DFRobot SEN0232 | Farnell 3517935 | 1 | [Farnell product page](https://fr.farnell.com/dfrobot/sen0232/sonom-tre-analogique-arduino/dp/3517935) | Analog output, 30–130 dBA nominal range |
+| LoRaWAN radio | Seeed Studio Grove Wio-E5, EU868 | Farnell 4007875 | 1 | [Farnell product page](https://fr.farnell.com/seeed-studio/113020091/module-lora-e5-carte-arduino-pi/dp/4007875) | UART/AT-command interface |
+| Solar power system | DFRobot KIT0210, 10 W / 18 V | Farnell 4829811 | 1 | [Farnell product page](https://fr.farnell.com/dfrobot/kit0210/solar-power-bank-kit-12v-5v-1a/dp/4829811) | Solar panel, controller, cabling, outdoor accessories |
+| Battery cells | RS PRO 18650, 3.6 V, 3500 mAh | RS 0206038 | 3 | [RS product page](https://fr.rs-online.com/web/p/piles-rechargeables-taille-speciale/0206038) | Use three identical new cells; verify mechanical compatibility before ordering |
+| Electronics enclosure | Hammond 1555F2F42GY, IP-rated polycarbonate | Farnell 1829810 | 1 | [Farnell product page](https://fr.farnell.com/en-FR/hammond/1555f2f42gy/box-flanged-pc-ip67/dp/1829810) | Light-coloured enclosure preferred outdoors |
+| PCB/module mounting | 3M VHB 5952 double-sided acrylic foam tape | Farnell 3935787 | 1 roll | [Farnell product page](https://fr.farnell.com/3m/5952-black-3m-x-19mm/ruban-double-face-3m-x-19mm-noir/dp/3935787) | 19 mm wide, approximately 1.1 mm thick; directly mount the Pico, LoRa module, and other lightweight electronics inside the Hammond enclosure without drilling or a separate mounting plate |
+| Power isolation diode | SS14 Schottky diode | Farnell 2675133 | 1 | [Farnell product page](https://fr.farnell.com/multicomp-pro/ss14/redresseur-schottky-1a-40v-do/dp/2675133) | Between external 5 V supply and Pico VSYS |
+| Acoustic vent | Hydrophobic microphone-rated acoustic membrane | TBD | 1 | TBD | Must have documented acoustic insertion loss / frequency response |
+| LoRa antenna | EU868 antenna | Included with Wio-E5 or compatible external antenna | 1 | TBD | Keep clear of enclosure shielding |
 
 ## Optional environmental sensor
 
 The following sensor may be added later:
 
-| Function | Part | Reference | Qty. | Notes |
-|---|---|---|---:|---|
-| PM sensor | DFRobot SEN0460 | Farnell 3974148 | 1 | I2C, PM1.0 / PM2.5 / PM10 |
+| Function | Part | Reference | Qty. | Product URL | Notes |
+|---|---|---|---:|---|---|
+| PM sensor | DFRobot SEN0460 | Farnell 3974148 | 1 | [Farnell product page](https://fr.farnell.com/dfrobot/sen0460/module-capteur-de-qualit-de-l/dp/3974148) | I2C, PM1.0 / PM2.5 / PM10 |
 
 The SEN0460 is not part of the baseline node unless explicitly requested.
 
@@ -184,7 +185,7 @@ The current cost-oriented candidate is:
 - RS PRO 18650
 - 3.6 V nominal
 - 3500 mAh
-- RS reference 0206038
+- RS reference 0206038 — [RS product page](https://fr.rs-online.com/web/p/piles-rechargeables-taille-speciale/0206038)
 - quantity: 3
 
 The previously considered Jauch LR1865HB is not the preferred option because of its high unit cost.
@@ -193,6 +194,26 @@ The previously considered Jauch LR1865HB is not the preferred option because of 
 
 The electronics enclosure should be IP-rated and preferably light-coloured.
 
+Mount lightweight modules directly inside the enclosure using small strips of 3M VHB 5952. This strategy minimizes assembly work for students: no custom plate cutting, no drilling of the enclosure base, and no separate internal mounting plate.
+
+```text
+Hammond 1555F2F42GY
+│
+├── Pico 2
+│     └── mounted directly with small strips of 3M VHB 5952
+│
+├── LoRa module
+│     └── mounted directly with small strips of 3M VHB 5952
+│
+└── SEN0232
+      └── mounted close to the acoustic opening
+          using VHB or a small removable mechanical support
+```
+
+Apply VHB only in small strips rather than covering the complete underside of each PCB, so that components are not unnecessarily thermally insulated, modules remain easier to remove, and test pads and exposed solder joints remain accessible.
+
+Hot-melt glue may be used for temporary laboratory prototypes or for strain relief. It should not be the preferred permanent mounting method for outdoor deployment because enclosure temperatures can become high in direct sunlight and some hot-melt adhesives may soften.
+
 The SEN0232 cannot simply be sealed behind solid plastic. Sound must reach the microphone through a protected acoustic path.
 
 Preferred arrangement:
@@ -200,22 +221,27 @@ Preferred arrangement:
 ```text
 outside
    |
-   v
 rain shield
    |
 hydrophobic acoustic membrane
    |
-short acoustic cavity
+acoustic opening
    |
 SEN0232 microphone
+   |
+small VHB strips / removable support
+   |
+inside enclosure
 ```
+
+Keep the microphone aligned with the acoustic opening and preserve a short acoustic cavity. Do not place adhesive over the microphone port.
 
 Requirements:
 
 - microphone aperture should face downward or be protected by a rain hood;
 - use a microphone-rated hydrophobic acoustic membrane;
 - do not substitute a generic waterproof pressure vent unless its acoustic response is documented;
-- calibrate the complete assembled node after the membrane, cavity, enclosure, and rain shield are installed;
+- calibrate the complete assembled node after the enclosure, acoustic membrane, rain shield, microphone cavity, and final SEN0232 mounting are installed;
 - avoid placing the battery against the solar-heated enclosure wall;
 - use sealed cable glands for solar and antenna connections as required.
 
