@@ -1,0 +1,28 @@
+<!doctype html>
+<html lang="fr">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>{{ if not .IsHome }}{{ .Title }} · {{ end }}{{ .Site.Title }}</title>
+  <meta name="description" content="{{ .Site.Params.description }}">
+  <link rel="stylesheet" href="{{ "css/main.css" | relURL }}">
+</head>
+<body>
+  <a class="skip" href="#content">Aller au contenu</a>
+  <header>
+    <a class="brand" href="{{ "" | relURL }}">NoiseNet<span>Station autonome · EU868</span></a>
+    <nav aria-label="Navigation principale">
+      {{ range slice (dict "path" "hardware/bom/" "label" "Matériel") (dict "path" "docs/" "label" "Documentation") (dict "path" "nodes/" "label" "Stations") (dict "path" "tests/" "label" "Essais") }}
+      <a href="{{ .path | relURL }}">{{ .label }}</a>
+      {{ end }}
+    </nav>
+  </header>
+  <main id="content">
+    {{ if not .IsHome }}<a class="back" href="{{ "" | relURL }}">← Vue d'ensemble</a>{{ end }}
+    <h1>{{ .Title }}</h1>
+    {{ with .Params.source }}<p class="source">Source : {{ . }}</p>{{ end }}
+    {{ block "main" . }}{{ end }}
+  </main>
+  <footer>NoiseNet · Documentation du projet · <a href="{{ "agents/" | relURL }}">Référence de conception</a></footer>
+</body>
+</html>

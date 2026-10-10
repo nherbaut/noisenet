@@ -25,6 +25,7 @@ Architecture de référence : Pico 2, SEN0232, Grove Wio-E5 et KIT0210 avec troi
 | Suivi de chaque station | [Stations](nodes/README.md) |
 | Protocoles et résultats | [Essais](tests/README.md) |
 | Firmware | [Sources](src/README.md) et [configuration](config/README.md) |
+| Site web et publication GitHub Pages | [Construction du site](docs/website.md) |
 
 ## Prochaines étapes
 

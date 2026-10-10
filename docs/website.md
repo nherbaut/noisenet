@@ -1,0 +1,34 @@
+# Site de documentation
+
+## Construire et consulter
+
+Prérequis : Hugo 0.165.0 ou plus récent, Python 3 et Make. Aucun thème externe, Node.js ou module Python supplémentaire n'est nécessaire.
+
+```bash
+make site-build
+make site-serve
+```
+
+Le site compilé est dans `public/`. L'aperçu est disponible sur `http://localhost:1313/`. `make site-check` construit le site et vérifie les liens et ressources internes.
+
+Le script `scripts/prepare-site.py` transforme les Markdown du projet en contenu Hugo et les quatre CSV de matériel en tableaux HTML avec téléchargement CSV. Les sources restent dans leurs emplacements habituels ; `.build/site/` et `public/` sont générés et ignorés par Git.
+
+Après modification d'un Markdown ou CSV, relancer `make site-prepare` dans un autre terminal pour actualiser l'aperçu. Hugo surveille ensuite les fichiers générés. Les modifications des templates et du CSS sont prises en compte directement.
+
+## Publier plus tard sur GitHub Pages
+
+Le dépôt utilise actuellement un remote GitLab. Ajouter un dépôt GitHub ou un miroir quand la publication sera souhaitée ; le Makefile fonctionne indépendamment de la forge.
+
+1. Pousser les sources, y compris `.github/workflows/pages.yml`, vers un dépôt GitHub.
+2. Dans **Settings → Pages**, choisir **GitHub Actions** comme source.
+3. Dans **Actions**, lancer manuellement **Publish documentation to GitHub Pages** sur la branche souhaitée.
+
+Le workflow utilise l'adresse fournie par GitHub, y compris le sous-chemin du dépôt. Aucun déploiement n'est déclenché par un simple push. Pour vérifier localement le cas d'un site de projet :
+
+```bash
+make site-check BASE_URL=https://USER.github.io/REPO/
+```
+
+Le site publie les Markdown de `hardware/`, `docs/`, `nodes/`, `tests/`, `src/` et `config/`, ainsi que le README et AGENTS.md. Il inclut les modèles de station et les quatre CSV de matériel ; les fichiers de données liés depuis les Markdown sont également copiés. `config/local/` et les fichiers nommés `secrets.*` sont exclus. Vérifier les documents, achats, inventaire et fiches de station avant une publication publique, notamment leurs données personnelles et identifiants sensibles.
+
+Référence : [déploiement Hugo sur GitHub Pages](https://gohugo.io/host-and-deploy/deploy-to-github-pages/).

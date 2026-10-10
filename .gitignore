@@ -8,6 +8,9 @@ config/local/
 # Sorties de compilation et outils
 build/
 .build/
+public/
+site/resources/
+site/.hugo_build.lock
 __pycache__/
 *.pyc
 .DS_Store
