@@ -1,6 +1,6 @@
 name: Publish documentation to GitHub Pages
 
-# Publish only when explicitly launched from the GitHub Actions interface.
+# Publish only when explicitly launched from GitHub Actions or make site-deploy.
 on:
   workflow_dispatch:
 

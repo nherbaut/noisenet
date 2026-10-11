@@ -17,13 +17,23 @@ Dans les tableaux de matériel, cliquer sur un fabricant ouvre sa documentation 
 
 Après modification d'un Markdown ou CSV, relancer `make site-prepare` dans un autre terminal pour actualiser l'aperçu. Hugo surveille ensuite les fichiers générés. Les modifications des templates et du CSS sont prises en compte directement.
 
-## Publier plus tard sur GitHub Pages
+## Publier sur GitHub Pages
 
-Le dépôt utilise actuellement un remote GitLab. Ajouter un dépôt GitHub ou un miroir quand la publication sera souhaitée ; le Makefile fonctionne indépendamment de la forge.
+Le dépôt utilise le remote GitLab `origin` et le miroir GitHub `github` (`nherbaut/noiset`).
 
 1. Pousser les sources, y compris `.github/workflows/pages.yml`, vers un dépôt GitHub.
 2. Dans **Settings → Pages**, choisir **GitHub Actions** comme source.
 3. Dans **Actions**, lancer manuellement **Publish documentation to GitHub Pages** sur la branche souhaitée.
+
+Pour déclencher le même workflow depuis le terminal, installer GitHub CLI (`gh`) et s'authentifier avec `gh auth login`, puis lancer :
+
+```bash
+make site-deploy
+# Autre branche ou autre dépôt GitHub :
+make site-deploy DEPLOY_REF=my-branch GITHUB_REPO=OWNER/REPO
+```
+
+La cible utilise par défaut le dépôt `nherbaut/noiset` et la branche `main`. Elle déploie les sources déjà présentes sur GitHub ; pousser les modifications avant de la lancer (`make push` pousse `main` vers les deux remotes). Suivre le résultat dans l'onglet **Actions** du dépôt GitHub.
 
 Le workflow utilise l'adresse fournie par GitHub, y compris le sous-chemin du dépôt. Aucun déploiement n'est déclenché par un simple push. Pour vérifier localement le cas d'un site de projet :
 

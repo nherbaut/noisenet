@@ -34,6 +34,7 @@ Build quantity: **two stations**. Quantities below cover both stations, includin
 | LoRa antenna | EU868 antenna | Included with Wio-E5 or compatible external antenna | 2 | TBD | Keep clear of enclosure shielding |
 | Cable glands | HellermannTyton NGM12-GY, M12, light grey, IP68 | Farnell 2499293 | 1 pack of 10 | [Farnell product page](https://fr.farnell.com/hellermanntyton/ngm12-gy/presse-etoupe-nylon-6-6-3mm-6/dp/2499293) | Cable diameter 3–6.5 mm; provisionally two per station for solar and antenna connections as required, with six spares; verify cable diameter and mounting accessories |
 | Shared LoRaWAN gateway | MikroTik wAP LR8G kit, 868 MHz | GETIC / RBwAPR-2nD&R11e-LR8G | 1 | [GETIC product page](https://www.getic.fr/product/mikrotik-wap-lr8g-kit) | Shared infrastructure for both stations; [manufacturer specifications](https://mikrotik.com/product/wap_lr8g_kit); included 24 V 0.8 A power adapter and PoE injector; provide dedicated power and Ethernet/Wi-Fi Internet access; verify coverage and configure the LoRaWAN server |
+| Grove connection cable | Seeed Studio 110990028, Grove 4-pin to female jumpers | Farnell 3932132 | 1 pack of 5 | [Farnell product page](https://fr.farnell.com/en-FR/seeed-studio/110990028/f-jumper-conversion-cable-4-pin/dp/3932132) | One cable per station for Wio-E5 and three spares; female jumpers fit 2.54 mm male headers; verify available headers and UART/power pinout |
 
 ## Optional environmental sensor
 
