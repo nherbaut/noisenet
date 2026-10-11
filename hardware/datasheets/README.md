@@ -5,6 +5,7 @@ Enregistrer les liens officiels et, lorsque possible, les fiches techniques cons
 | Composant | Page fournisseur | Source fabricant | Document / version | Date de consultation | Points à vérifier |
 |---|---|---|---|---|---|
 | Pico 2 | [Farnell 4531086](https://fr.farnell.com/raspberry-pi/raspberry-pi-pico-2/carte-mcu-rpi-pico-2-520ko-150mhz/dp/4531086) | [Raspberry Pi — doc](https://datasheets.raspberrypi.com/pico/pico-2-datasheet.pdf) | À renseigner | — | VSYS, budget 3V3, ADC, niveaux GPIO |
+| DFR0848 | [Farnell 4308193](https://fr.farnell.com/dfrobot/dfr0848/carte-d-expansion-gravit-carte/dp/4308193) | [DFRobot — doc](https://wiki.dfrobot.com/dfr0848) | À renseigner | — | Barrettes Pico, connecteurs Gravity, encombrement, chemin d'alimentation |
 | SEN0232 | [Farnell 3517935](https://fr.farnell.com/dfrobot/sen0232/sonom-tre-analogique-arduino/dp/3517935) | [DFRobot — doc](https://wiki.dfrobot.com/sen0232/) | À renseigner | — | Alimentation, transfert tension/niveau sonore, consommation |
 | Grove Wio-E5 | [Farnell 4007875](https://fr.farnell.com/seeed-studio/113020091/module-lora-e5-carte-arduino-pi/dp/4007875) | [Seeed Studio — doc](https://wiki.seeedstudio.com/Grove_LoRa_E5_New_Version/) | À renseigner | — | Alimentation du module Grove, UART, veille, antenne |
 | KIT0210 | [Farnell 4829811](https://fr.farnell.com/dfrobot/kit0210/solar-power-bank-kit-12v-5v-1a/dp/4829811) | [DFRobot — doc](https://wiki.dfrobot.com/kit0210/) | À renseigner | — | Sortie 5 V, holder, charge, protections, connecteurs |

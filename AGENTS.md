@@ -17,18 +17,23 @@ The system should operate autonomously from solar power, charge its battery duri
 
 ## Baseline BOM
 
-| Function | Part | Supplier / reference | Qty. | Product URL | Notes |
+Build quantity: **two stations**. Quantities below cover both stations, including shared packs and spares.
+
+| Function | Part | Supplier / reference | Qty. for 2 stations | Product URL | Notes |
 |---|---|---|---:|---|---|
-| MCU | Raspberry Pi Pico 2 | Farnell 4531086 | 1 | [Farnell product page](https://fr.farnell.com/raspberry-pi/raspberry-pi-pico-2/carte-mcu-rpi-pico-2-520ko-150mhz/dp/4531086) | Main controller |
-| Sound-level sensor | DFRobot SEN0232 | Farnell 3517935 | 1 | [Farnell product page](https://fr.farnell.com/dfrobot/sen0232/sonom-tre-analogique-arduino/dp/3517935) | Analog output, 30–130 dBA nominal range |
-| LoRaWAN radio | Seeed Studio Grove Wio-E5, EU868 | Farnell 4007875 | 1 | [Farnell product page](https://fr.farnell.com/seeed-studio/113020091/module-lora-e5-carte-arduino-pi/dp/4007875) | UART/AT-command interface |
-| Solar power system | DFRobot KIT0210, 10 W / 18 V | Farnell 4829811 | 1 | [Farnell product page](https://fr.farnell.com/dfrobot/kit0210/solar-power-bank-kit-12v-5v-1a/dp/4829811) | Solar panel, controller, cabling, outdoor accessories |
-| Battery cells | RS PRO 18650, 3.6 V, 3500 mAh | RS 0206038 | 3 | [RS product page](https://fr.rs-online.com/web/p/piles-rechargeables-taille-speciale/0206038) | Use three identical new cells; verify mechanical compatibility before ordering |
-| Electronics enclosure | Hammond 1555F2F42GY, IP-rated polycarbonate | Farnell 1829810 | 1 | [Farnell product page](https://fr.farnell.com/en-FR/hammond/1555f2f42gy/box-flanged-pc-ip67/dp/1829810) | Light-coloured enclosure preferred outdoors |
-| PCB/module mounting | 3M VHB 5952 double-sided acrylic foam tape | Farnell 3935787 | 1 roll | [Farnell product page](https://fr.farnell.com/3m/5952-black-3m-x-19mm/ruban-double-face-3m-x-19mm-noir/dp/3935787) | 19 mm wide, approximately 1.1 mm thick; directly mount the Pico, LoRa module, and other lightweight electronics inside the Hammond enclosure without drilling or a separate mounting plate |
-| Power isolation diode | SS14 Schottky diode | Farnell 2675133 | 1 | [Farnell product page](https://fr.farnell.com/multicomp-pro/ss14/redresseur-schottky-1a-40v-do/dp/2675133) | Between external 5 V supply and Pico VSYS |
-| Acoustic vent | Hydrophobic microphone-rated acoustic membrane | TBD | 1 | TBD | Must have documented acoustic insertion loss / frequency response |
-| LoRa antenna | EU868 antenna | Included with Wio-E5 or compatible external antenna | 1 | TBD | Keep clear of enclosure shielding |
+| MCU | Raspberry Pi Pico 2 | Farnell 4531086 | 2 | [Farnell product page](https://fr.farnell.com/raspberry-pi/raspberry-pi-pico-2/carte-mcu-rpi-pico-2-520ko-150mhz/dp/4531086) | Main controller |
+| Pico IO expansion | DFRobot DFR0848 Gravity expansion board for Raspberry Pi Pico / Pico 2 | Farnell 4308193 | 2 | [Farnell product page](https://fr.farnell.com/dfrobot/dfr0848/carte-d-expansion-gravit-carte/dp/4308193) | Simplifies sensor and module connections; verify Pico pin headers, connector compatibility, enclosure fit, and power routing before assembly |
+| Sound-level sensor | DFRobot SEN0232 | Farnell 3517935 | 2 | [Farnell product page](https://fr.farnell.com/dfrobot/sen0232/sonom-tre-analogique-arduino/dp/3517935) | Analog output, 30–130 dBA nominal range |
+| LoRaWAN radio | Seeed Studio Grove Wio-E5, EU868 | Farnell 4007875 | 2 | [Farnell product page](https://fr.farnell.com/seeed-studio/113020091/module-lora-e5-carte-arduino-pi/dp/4007875) | UART/AT-command interface |
+| Solar power system | DFRobot KIT0210, 10 W / 18 V | Farnell 4829811 | 2 | [Farnell product page](https://fr.farnell.com/dfrobot/kit0210/solar-power-bank-kit-12v-5v-1a/dp/4829811) | Solar panel, controller, cabling, outdoor accessories |
+| Battery cells | RS PRO 18650, 3.6 V, 3500 mAh | RS 0206038 | 6 | [RS product page](https://fr.rs-online.com/web/p/piles-rechargeables-taille-speciale/0206038) | Use three identical new cells; verify mechanical compatibility before ordering |
+| Electronics enclosure | Hammond 1555F2F42GY, IP-rated polycarbonate | Farnell 1829810 | 2 | [Farnell product page](https://fr.farnell.com/en-FR/hammond/1555f2f42gy/box-flanged-pc-ip67/dp/1829810) | Light-coloured enclosure preferred outdoors |
+| PCB/module mounting | 3M VHB 5952 double-sided acrylic foam tape | Farnell 3935787 | 2 rolls | [Farnell product page](https://fr.farnell.com/3m/5952-black-3m-x-19mm/ruban-double-face-3m-x-19mm-noir/dp/3935787) | 19 mm wide, approximately 1.1 mm thick; directly mount the Pico, LoRa module, and other lightweight electronics inside the Hammond enclosure without drilling or a separate mounting plate |
+| Power isolation diode | SS14 Schottky diode | Farnell 2675133 | 2 | [Farnell product page](https://fr.farnell.com/multicomp-pro/ss14/redresseur-schottky-1a-40v-do/dp/2675133) | Between external 5 V supply and Pico VSYS |
+| Acoustic vent | Hydrophobic microphone-rated acoustic membrane | TBD | 2 | TBD | Must have documented acoustic insertion loss / frequency response |
+| LoRa antenna | EU868 antenna | Included with Wio-E5 or compatible external antenna | 2 | TBD | Keep clear of enclosure shielding |
+| Cable glands | HellermannTyton NGM12-GY, M12, light grey, IP68 | Farnell 2499293 | 1 pack of 10 | [Farnell product page](https://fr.farnell.com/hellermanntyton/ngm12-gy/presse-etoupe-nylon-6-6-3mm-6/dp/2499293) | Cable diameter 3–6.5 mm; provisionally two per station for solar and antenna connections as required, with six spares; verify cable diameter and mounting accessories |
+| Shared LoRaWAN gateway | MikroTik wAP LR8G kit, 868 MHz | GETIC / RBwAPR-2nD&R11e-LR8G | 1 | [GETIC product page](https://www.getic.fr/product/mikrotik-wap-lr8g-kit) | Shared infrastructure for both stations; [manufacturer specifications](https://mikrotik.com/product/wap_lr8g_kit); included 24 V 0.8 A power adapter and PoE injector; provide dedicated power and Ethernet/Wi-Fi Internet access; verify coverage and configure the LoRaWAN server |
 
 ## Optional environmental sensor
 

@@ -12,7 +12,7 @@ Architecture de référence : Pico 2, SEN0232, Grove Wio-E5 et KIT0210 avec troi
 
 | Besoin | Fichier ou dossier |
 |---|---|
-| Matériel prévu pour une station | [Nomenclature](hardware/bom.csv) |
+| Matériel prévu pour deux stations | [Nomenclature](hardware/bom.csv) |
 | Matériel optionnel hors baseline | [Options](hardware/optional-bom.csv) |
 | Commandes et réceptions | [Achats](hardware/procurement.csv) |
 | Matériel disponible et affectation | [Inventaire](hardware/inventory.csv) |
