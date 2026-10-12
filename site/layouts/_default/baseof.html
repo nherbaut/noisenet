@@ -15,6 +15,7 @@
       {{ range slice (dict "path" "hardware/bom/" "label" "Matériel") (dict "path" "docs/" "label" "Documentation") (dict "path" "nodes/" "label" "Stations") (dict "path" "tests/" "label" "Essais") }}
       <a href="{{ .path | relURL }}">{{ .label }}</a>
       {{ end }}
+      {{ with .Site.Params.githubRepository }}<a href="{{ . }}/issues">Issues</a>{{ end }}
     </nav>
   </header>
   <main id="content">
@@ -23,6 +24,13 @@
     {{ with .Params.source }}<p class="source">Source : {{ . }}</p>{{ end }}
     {{ block "main" . }}{{ end }}
   </main>
-  <footer>NoiseNet · Documentation du projet · <a href="{{ "agents/" | relURL }}">Référence de conception</a></footer>
+  <footer>
+    NoiseNet · Documentation du projet
+    {{ with .Site.Params.githubRepository }}
+      {{ $title := printf "Documentation : %s" $.Title }}
+      {{ $body := printf "Page concernée : %s\n\nDescription du problème :\n" $.Permalink }}
+      · <a href="{{ . }}/issues/new?title={{ $title | urlquery }}&amp;body={{ $body | urlquery }}">Signaler un problème sur cette page</a>
+    {{ end }}
+  </footer>
 </body>
 </html>

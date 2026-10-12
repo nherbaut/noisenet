@@ -1,6 +1,6 @@
 # Firmware
 
-Le firmware n'est pas encore implémenté. Organisation prévue par AGENTS.md :
+Le firmware n'est pas encore implémenté. Organisation prévue :
 
 ```text
 src/

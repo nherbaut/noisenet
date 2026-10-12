@@ -76,7 +76,7 @@ def prepare():
     # Only this generated subtree is replaced, never the source documents.
     if OUTPUT.exists():
         shutil.rmtree(OUTPUT)
-    sources = [Path('README.md'), Path('AGENTS.md')]
+    sources = [Path('README.md')]
     for folder in FOLDERS:
         sources.extend(sorted(p.relative_to(ROOT) for p in (ROOT / folder).rglob('*.md')
                               if 'local' not in p.parts and not p.name.startswith('secrets.')))

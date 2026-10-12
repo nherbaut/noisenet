@@ -3,7 +3,7 @@ PYTHON ?= python3
 BASE_URL ?= http://localhost:1313/
 PORT ?= 1313
 GH ?= gh
-GITHUB_REPO ?= nherbaut/noiset
+GITHUB_REPO ?= nherbaut/noisenet
 DEPLOY_REF ?= main
 
 .PHONY: help site-prepare site-build site-serve site-check site-deploy push

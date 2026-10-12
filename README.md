@@ -4,7 +4,7 @@ Station autonome de mesure du bruit urbain, alimentée par énergie solaire et t
 
 ## État du projet
 
-Le dépôt contient la documentation de départ. Aucun achat, assemblage ou essai n'est encore enregistré. Les références de matériel sont reprises d'[AGENTS.md](AGENTS.md) ; leur compatibilité reste à vérifier avant commande.
+Le dépôt contient la documentation de départ. Aucun achat, assemblage ou essai n'est encore enregistré. Les références de matériel figurent dans la [nomenclature](hardware/bom.csv) ; leur compatibilité reste à vérifier avant commande.
 
 Architecture de référence : Pico 2, SEN0232, Grove Wio-E5 et KIT0210 avec trois cellules 18650 identiques. Le SEN0460 est une option hors nomenclature de base.
 

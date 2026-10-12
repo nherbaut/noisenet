@@ -1,6 +1,6 @@
 # Sources techniques
 
-Enregistrer les liens officiels et, lorsque possible, les fiches techniques consultées. Les pages fournisseur sont reprises des liens vérifiés dans [AGENTS.md](../../AGENTS.md). Leur identification ne vaut pas validation des fiches techniques ou de la compatibilité électrique et mécanique.
+Enregistrer les liens officiels et, lorsque possible, les fiches techniques consultées. Les pages fournisseur figurent dans la [nomenclature](../bom.csv). Leur identification ne vaut pas validation des fiches techniques ou de la compatibilité électrique et mécanique.
 
 | Composant | Page fournisseur | Source fabricant | Document / version | Date de consultation | Points à vérifier |
 |---|---|---|---|---|---|

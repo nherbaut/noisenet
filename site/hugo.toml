@@ -17,3 +17,4 @@ endLevel = 3
 
 [params]
 description = 'Suivi matériel et documentation de la station de mesure NoiseNet'
+githubRepository = 'https://github.com/nherbaut/noisenet'
