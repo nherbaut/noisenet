@@ -6,7 +6,7 @@ Statut : architecture prévue, câblage à valider avant mise sous tension.
 Panneau solaire 10 W / 18 V
   -> système KIT0210 avec trois cellules 18650 identiques
   -> sortie régulée 5 V
-  -> anode SS14 -> cathode SS14 -> Pico 2 VSYS
+  -> anode 1N5819 -> cathode 1N5819 -> Pico 2 VSYS
 Pico 2 3V3 -> SEN0232
 SEN0232 sortie analogique -> GP26 / ADC0
 Pico UART -> Grove Wio-E5
@@ -15,7 +15,7 @@ Masses communes
 
 | Source | Destination | État / vérification |
 |---|---|---|
-| KIT0210 5 V régulé | SS14 puis VSYS | Vérifier tension, polarité, connecteurs et chute de tension |
+| KIT0210 5 V régulé | 1N5819 puis VSYS | Vérifier tension, polarité, connecteurs et chute de tension |
 | Pico 3V3 | SEN0232 alimentation | Vérifier consommation et budget du rail |
 | SEN0232 analogique | GP26 / ADC0 | Vérifier plage de tension compatible ADC |
 | Pico UART TX | Wio-E5 RX | GPIO à choisir ; vérifier niveaux logiques |
@@ -27,3 +27,5 @@ Masses communes
 Le circuit de mesure batterie doit être dimensionné selon la topologie et la plage réelles du KIT0210. Documenter le diviseur, la référence de masse, les protections et la conversion avant raccordement.
 
 Ne jamais alimenter le Pico depuis le panneau brut ou des cellules nues. La charge et le passage solaire/batterie restent assurés par le KIT0210. Documenter également le branchement USB lors du développement.
+
+La diode retenue est une **1N5819 STMicroelectronics, axiale traversante DO-41, 1 A / 40 V**, adaptée à la soudure manuelle. Pour chaque station, relier l’anode au 5 V régulé du gestionnaire d’alimentation et la cathode (côté bague) à VSYS. Isoler les soudures et les pattes exposées avec de la gaine thermorétractable ; contrôler la tension VSYS en charge.

@@ -27,7 +27,7 @@ Build quantity: **one solar station (A) and one USB-rechargeable battery-only st
 | Battery cells | RS PRO 18650, 3.6 V, 3500 mAh | RS 0206038 | 3 | 0 | 3 | [RS product page](https://fr.rs-online.com/web/p/piles-rechargeables-taille-speciale/0206038) | Station A only; three identical new matched cells; verify KIT0210 holder fit and cell charging specifications. |
 | Electronics enclosure | Hammond 1555F2F42GY, IP-rated polycarbonate | Farnell 1829810 | 1 | 1 | 2 | [Farnell product page](https://fr.farnell.com/en-FR/hammond/1555f2f42gy/box-flanged-pc-ip67/dp/1829810) | Light-coloured enclosure preferred outdoors |
 | PCB/module mounting | 3M VHB 5952 double-sided acrylic foam tape | Farnell 3935787 | Shared | Shared | 1 roll | [Farnell product page](https://fr.farnell.com/3m/5952-black-3m-x-19mm/ruban-double-face-3m-x-19mm-noir/dp/3935787) | Shared project consumable; 19 mm wide, approximately 1.1 mm thick; small strips for direct mounting without an internal plate or base drilling. |
-| Power isolation diode | SS14 Schottky diode | Farnell 2675133 | 1 | 1 | 2 | [Farnell product page](https://fr.farnell.com/multicomp-pro/ss14/redresseur-schottky-1a-40v-do/dp/2675133) | Between external 5 V supply and Pico VSYS |
+| Power isolation diode | STMicroelectronics 1N5819, axial DO-41, 1 A / 40 V | Farnell 9801219 | 1 | 1 | 5 pieces | [Farnell product page](https://fr.farnell.com/stmicroelectronics/1n5819/diode-schottky-1a-40v/dp/9801219) | Between regulated 5 V and Pico VSYS; through-hole leads for manual soldering; two installed and three spares. Farnell minimum/multiple of five checked 2026-10-12; re-check before ordering. |
 | Acoustic vent | Hydrophobic microphone-rated acoustic membrane | TBD | 1 | 1 | 2 | TBD | Must have documented acoustic insertion loss / frequency response |
 | LoRa antenna | EU868 antenna | Included with Wio-E5 or compatible external antenna | 1 | 1 | 2 | TBD | Keep clear of enclosure shielding |
 | Cable glands | HellermannTyton NGM12-GY, M12, light grey, IP68 | Farnell 2499293 | 1 | 0 | 1 pack of 10 | [Farnell product page](https://fr.farnell.com/hellermanntyton/ngm12-gy/presse-etoupe-nylon-6-6-3mm-6/dp/2499293) | One M12 IP68 gland for Station A regulated 5 V cable entering the Hammond enclosure; nine spare glands. Cable diameter 3–6.5 mm; verify fit and mounting accessories. KIT0210 PG7 glands are already included; additional antenna or USB cable entries only if required by final routing. |
@@ -86,7 +86,7 @@ DFRobot KIT0210 <----> 3 x matched RS PRO 18650 cells
         |
 regulated 5 V output
         |
-       SS14
+       1N5819
         |
         v
     Pico 2 VSYS
@@ -104,7 +104,7 @@ DFRobot DFR0559 <----> 1S 3.7 V BAK battery (4.2 V fully charged)
        |
 regulated 5 V output
        |
-      SS14
+      1N5819
        |
        v
    Pico 2 VSYS
@@ -124,7 +124,7 @@ USB 5 V
 DFR0559
    +----> charges 1S battery
    |
-   +----> regulated 5 V -> SS14 -> Pico VSYS
+   +----> regulated 5 V -> 1N5819 -> Pico VSYS
 
 Without USB:
 1S battery
@@ -134,7 +134,7 @@ DFR0559 boost converter
    |
 regulated 5 V
    |
-  SS14
+  1N5819
    |
    v
 Pico VSYS
@@ -147,13 +147,13 @@ The application hardware and firmware must operate identically with USB charging
 For both stations:
 
 ```text
-power manager regulated 5 V -> SS14 -> Pico VSYS
+power manager regulated 5 V -> 1N5819 -> Pico VSYS
 Pico 3V3 -> SEN0232
 Wio-E5 supply -> appropriate regulated rail per module requirements
 power manager GND = Pico GND = SEN0232 GND = Wio-E5 GND
 ```
 
-Orient SS14 to conduct from the power manager toward VSYS. Do not feed external 5 V into Pico `3V3`. Never power the Pico directly from a raw solar panel or bare Li-ion cells. Each station's power manager handles battery charging and protection.
+Orient 1N5819 to conduct from the power manager toward VSYS: anode toward regulated 5 V, cathode (marked band) toward VSYS. Insulate solder joints and exposed leads with heat-shrink tubing. Do not feed external 5 V into Pico `3V3`. Never power the Pico directly from a raw solar panel or bare Li-ion cells. Each station's power manager handles battery charging and protection.
 
 ## Pico pin allocation
 
@@ -444,7 +444,7 @@ The server should convert the binary payload to JSON or database records after L
 For both stations:
 
 - never connect an 18 V solar panel directly to the Pico or a lithium battery;
-- use regulated 5 V through SS14 to Pico VSYS; never feed external 5 V into `3V3`;
+- use regulated 5 V through 1N5819 to Pico VSYS; never feed external 5 V into `3V3`;
 - retain common ground between the power manager, Pico, SEN0232 and Wio-E5;
 - never charge lithium batteries outside their specified temperature range;
 - protect electronics, batteries and charging connections from rain and condensation;
