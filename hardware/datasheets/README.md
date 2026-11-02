@@ -25,3 +25,5 @@ Références ajoutées à la nomenclature :
 - Antenne de passerelle MikroTik `868_Omni_antenna` : [GETIC](https://www.getic.fr/product/mikrotik-868-omni-antenna), [documentation fabricant](https://mikrotik.com/product/868_omni_antenna). Un kit partagé : antenne 6,5 dBi SMA femelle, câble SMA mâle–mâle de 1 m et fixation inclus. Achat externe facultatif si l’antenne interne suffit après essais ; [manuel de la passerelle](https://manual.mikrotik.com/hardware/wap-lr8g-kit/).
 
 - Câble Wio-E5 vers DFR0848 : Seeed Studio `110990210`, Grove vers Dupont **mâles**, [Farnell 3410135, lot de cinq](https://fr.farnell.com/en-FR/seeed-studio/110990210/cable-4-pin-male-jumper-grove/dp/3410135), [fiche technique](https://www.farnell.com/datasheets/3681572.pdf).
+
+- Capteur environnemental Grove BME280 Seeed Studio `101020193` : [Farnell 3932095](https://fr.farnell.com/seeed-studio/101020193/carte-capteur-carte-arduino/dp/3932095), [documentation fabricant](https://wiki.seeedstudio.com/Grove-Barometer_Sensor-BME280/). Deux unités ; vérifier raccordement I2C à 3.3 V et exposition à l’air ambiant à l’abri de la pluie.
