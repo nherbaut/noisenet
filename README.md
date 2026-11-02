@@ -1,12 +1,12 @@
 # NoiseNet
 
-Station autonome de mesure du bruit urbain, alimentée par énergie solaire et transmettant des résumés par LoRaWAN EU868.
+Deux stations de mesure du bruit urbain, une solaire et une sur batterie rechargeable par USB, transmettant des résumés par LoRaWAN EU868.
 
 ## État du projet
 
 Le dépôt contient la documentation de départ. Aucun achat, assemblage ou essai n'est encore enregistré. Les références de matériel figurent dans la [nomenclature](hardware/bom.csv) ; leur compatibilité reste à vérifier avant commande.
 
-Architecture de référence : Pico 2, SEN0232, Grove Wio-E5 et KIT0210 avec trois cellules 18650 identiques. Le SEN0460 est une option hors nomenclature de base.
+Architecture de référence : Pico 2 WH, SEN0232, Grove Wio-E5 et GPS TEL0157 sur extension Gravity DFR0848. La station A utilise le KIT0210 avec trois cellules 18650 identiques ; la station B utilise le DFR0559 avec une batterie BAK 1S rechargeable par USB. Un seul boîtier Hammond est prévu à l’achat, avec affectation à définir. Le SEN0460 est une option hors nomenclature de base.
 
 ## Navigation
 

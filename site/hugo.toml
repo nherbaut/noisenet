@@ -2,6 +2,7 @@ baseURL = 'http://localhost:1313/'
 locale = 'fr-FR'
 defaultContentLanguage = 'fr'
 title = 'NoiseNet'
+publishDir = '../public'
 contentDir = '../.build/site/content'
 dataDir = '../.build/site/data'
 staticDir = ['static', '../.build/site/static']

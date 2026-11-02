@@ -23,3 +23,5 @@ Références ajoutées à la nomenclature :
 
 - GNSS DFRobot TEL0157 : [Farnell 4457334](https://fr.farnell.com/en-FR/dfrobot/tel0157/gnss-module-i2c-uart-2m-3-3-to/dp/4457334), [documentation DFRobot](https://wiki.dfrobot.com/tel0157/). Un module par station ; intégration à définir.
 - Antenne de passerelle MikroTik `868_Omni_antenna` : [GETIC](https://www.getic.fr/product/mikrotik-868-omni-antenna), [documentation fabricant](https://mikrotik.com/product/868_omni_antenna). Un kit partagé : antenne 6,5 dBi SMA femelle, câble SMA mâle–mâle de 1 m et fixation inclus. Achat externe facultatif si l’antenne interne suffit après essais ; [manuel de la passerelle](https://manual.mikrotik.com/hardware/wap-lr8g-kit/).
+
+- Câble Wio-E5 vers DFR0848 : Seeed Studio `110990210`, Grove vers Dupont **mâles**, [Farnell 3410135, lot de cinq](https://fr.farnell.com/en-FR/seeed-studio/110990210/cable-4-pin-male-jumper-grove/dp/3410135), [fiche technique](https://www.farnell.com/datasheets/3681572.pdf).

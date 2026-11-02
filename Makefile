@@ -22,7 +22,7 @@ site-build: site-prepare
 	$(HUGO) --source site --destination ../public --baseURL "$(BASE_URL)" --minify --cleanDestinationDir
 
 site-serve: site-prepare
-	$(HUGO) server --source site --port $(PORT) --baseURL "http://localhost:$(PORT)/" --disableFastRender
+	$(HUGO) server --source site --destination ../public --port $(PORT) --baseURL "http://localhost:$(PORT)/" --disableFastRender
 
 site-check: site-build
 	$(PYTHON) scripts/check-site.py --base-url "$(BASE_URL)"
