@@ -7,17 +7,17 @@ NoiseNet is an outdoor environmental sensing node intended to measure urban nois
 The project contains exactly two complete sensing stations:
 
 - **Station A:** solar-powered, using one DFRobot KIT0210 and three matched RS PRO 18650 cells.
-- **Station B:** battery-only, using one DFRobot DFR0559 and one BAK Technology 1S 3.7 V battery, rechargeable through USB. No solar panel is fitted to Station B.
+- **Station B:** powered directly through the Pico 2 WH micro-USB port using a Raspberry Pi 5 USB-C PSU and USB-C-female to micro-USB-male adapter. No solar panel, battery or battery charger is fitted to Station B.
 
 Both stations use the Raspberry Pi Pico 2 WH (SC1634, presoldered headers), DFRobot SEN0232, Grove Wio-E5 EU868, DFR0848 expansion board and the selected Hammond outdoor enclosure design; purchase only one enclosure for the project, with allocation to A/B to be decided. Common sensing, LoRaWAN, enclosure and firmware decisions remain unchanged.
 
-Station A charges during daylight and continues on battery when solar power is unavailable. Station B operates from its battery and can continue measuring while USB charging power is connected.
+Station A charges during daylight and continues on battery when solar power is unavailable. Station B measures while USB power is present and stops when it is disconnected; no battery backup is provided.
 
 ## Baseline BOM
 
-Build quantity: **one solar station (A) and one USB-rechargeable battery-only station (B)**. Station columns describe installed requirements. Total quantities include shared consumables and supplier packs; surplus items are spares, not additional stations.
+Build quantity: **one solar station (A) and one directly USB-powered station (B)**. Station columns describe installed requirements. Total quantities include shared consumables and supplier packs; surplus items are spares, not additional stations.
 
-| Function | Part | Supplier / reference | Solar station qty | Battery-only station qty | Total qty | Product URL | Notes |
+| Function | Part | Supplier / reference | Solar station qty | USB station qty | Total qty | Product URL | Notes |
 |---|---|---|---:|---:|---:|---|---|
 | MCU | Raspberry Pi Pico 2 WH (SC1634), presoldered headers | Farnell 4667138 | 1 | 1 | 2 | [Farnell product page](https://fr.farnell.com/raspberry-pi/sc1634/rpi-pico-2w-brd-520kb-150mhz-w/dp/4667138) | Main controller; presoldered headers included; retain Wio-E5 for LoRaWAN. |
 | Pico IO expansion | DFRobot DFR0848 Gravity expansion board for Raspberry Pi Pico / Pico 2 | Farnell 4308193 | 1 | 1 | 2 | [Farnell product page](https://fr.farnell.com/dfrobot/dfr0848/carte-d-expansion-gravit-carte/dp/4308193) | Simplifies sensor and module connections; verify Pico pin headers, connector compatibility, enclosure fit, and power routing before assembly |
@@ -27,24 +27,21 @@ Build quantity: **one solar station (A) and one USB-rechargeable battery-only st
 | Battery cells | RS PRO 18650, 3.6 V, 3500 mAh | RS 0206038 | 3 | 0 | 3 | [RS product page](https://fr.rs-online.com/web/p/piles-rechargeables-taille-speciale/0206038) | Station A only; three identical new matched cells; verify KIT0210 holder fit and cell charging specifications. |
 | Electronics enclosure | Hammond 1555F2F42GY, IP-rated polycarbonate | Farnell 1829810 | To allocate | To allocate | 1 | [Farnell product page](https://fr.farnell.com/en-FR/hammond/1555f2f42gy/box-flanged-pc-ip67/dp/1829810) | Purchase only one enclosure; allocation A/B TBD. Do not assume another enclosure is already available; protect each station before outdoor deployment. |
 | PCB/module mounting | 3M VHB 5952 double-sided acrylic foam tape | Farnell 3935787 | Shared | Shared | 1 roll | [Farnell product page](https://fr.farnell.com/3m/5952-black-3m-x-19mm/ruban-double-face-3m-x-19mm-noir/dp/3935787) | Shared project consumable; 19 mm wide, approximately 1.1 mm thick; small strips for direct mounting without an internal plate or base drilling. |
-| Power isolation diode | STMicroelectronics 1N5819, axial DO-41, 1 A / 40 V | Farnell 9801219 | 1 | 1 | 5 pieces | [Farnell product page](https://fr.farnell.com/stmicroelectronics/1n5819/diode-schottky-1a-40v/dp/9801219) | Between regulated 5 V and Pico VSYS; through-hole leads for manual soldering; two installed and three spares. Farnell minimum/multiple of five checked 2026-10-12; re-check before ordering. |
+| Power isolation diode | STMicroelectronics 1N5819, axial DO-41, 1 A / 40 V | Farnell 9801219 | 1 | 0 | 5 pieces | [Farnell product page](https://fr.farnell.com/stmicroelectronics/1n5819/diode-schottky-1a-40v/dp/9801219) | Station A only, between KIT0210 regulated 5 V and Pico VSYS; one installed and four spares. Station B uses the onboard USB diode and needs no external diode. Farnell minimum/multiple of five checked 2026-10-12; re-check before ordering. |
 | Acoustic vent | Hydrophobic microphone-rated acoustic membrane | TBD | 1 | 1 | 2 | TBD | Must have documented acoustic insertion loss / frequency response |
 | LoRa antenna | EU868 antenna | Included with Wio-E5 or compatible external antenna | 1 | 1 | 2 | TBD | Keep clear of enclosure shielding |
 | Cable glands | HellermannTyton NGM12-GY, M12, light grey, IP68 | Farnell 2499293 | 1 | 0 | 1 pack of 10 | [Farnell product page](https://fr.farnell.com/hellermanntyton/ngm12-gy/presse-etoupe-nylon-6-6-3mm-6/dp/2499293) | One M12 IP68 gland for Station A regulated 5 V cable entering the Hammond enclosure; nine spare glands. Cable diameter 3–6.5 mm; verify fit and mounting accessories. KIT0210 PG7 glands are already included; additional antenna or USB cable entries only if required by final routing. |
 | Shared LoRaWAN gateway | MikroTik wAP LR8G kit, 868 MHz | GETIC / RBwAPR-2nD&R11e-LR8G | Shared | Shared | 1 | [GETIC product page](https://www.getic.fr/product/mikrotik-wap-lr8g-kit) | Shared infrastructure for both stations; [manufacturer specifications](https://mikrotik.com/product/wap_lr8g_kit); included 24 V 0.8 A power adapter and PoE injector; provide dedicated power and Ethernet/Wi-Fi Internet access; verify coverage and configure the LoRaWAN server |
 | Grove connection cable | Seeed Studio 110990210, Grove 4-pin to male jumpers | Farnell 3410135 | 1 | 1 | 1 pack of 5 | [Farnell product page](https://fr.farnell.com/en-FR/seeed-studio/110990210/cable-4-pin-male-jumper-grove/dp/3410135) | One cable per station for Wio-E5 and three spares; male 2.54 mm jumpers fit DFR0848 female headers; no soldering; cross TX/RX and verify power/GND. |
-| USB-rechargeable power manager | DFRobot Solar Power Manager 5 V, DFR0559 | Farnell France 3769962 | 0 | 1 | 1 | [Farnell product page](https://fr.farnell.com/dfrobot/dfr0559/module-de-gestion-de-l-nergie/dp/3769962) | Station B only; USB 5 V charging; 1S 3.7 V battery; regulated 5 V / 1 A; maximum charging current 900 mA; solar input unused. |
-| Battery-only station battery | BAK Technology 18650CA-1S-3J, 3.7 V, 2250 mAh | Farnell France 2401852 | 0 | 1 | 1 | [Farnell product page](https://fr.farnell.com/bak-technology/18650ca-1s-3j/batt-rechargeable-li-ion-3-7v/dp/2401852) | Station B only; one 1S battery, 4.2 V charge voltage; connector type unverified; use BAT IN terminal fallback if needed. |
 | Pico headers | Presoldered headers included with Pico 2 WH | Included | 1 included set | 1 included set | 0 additional sets | Included with MCU | Do not order separate Pico headers; verify fit with DFR0848. |
 | Common wiring | Hookup wire already available at home | User stock | As needed | As needed | 0 to buy | — | User supplies wire; connectors still depend on final routing. |
-| USB charger | Raspberry Pi 5 official 27 W USB-C PSU EU black, SC1157 | Farnell 4263045 | 1 | 1 | 2 (quantity assumed, confirm) | [Farnell product page](https://fr.farnell.com/raspberry-pi/sc1157/alimentation-usb-c-5-1v-5a-noire/dp/4263045) | Captive USB-C cable; base output 5.1 V; B charges through DFR0559 USB IN; KIT0210 USB-C input needs no adapter. |
+| USB charger | Raspberry Pi 5 official 27 W USB-C PSU EU black, SC1157 | Farnell 4263045 | 1 | 1 | 2 (quantity assumed, confirm) | [Farnell product page](https://fr.farnell.com/raspberry-pi/sc1157/alimentation-usb-c-5-1v-5a-noire/dp/4263045) | Captive USB-C cable; base output 5.1 V; B powered directly through Pico micro-USB via adapter; KIT0210 USB-C input needs no adapter. |
 | USB charging adapter | CAB55550, USB-C female to micro-USB male | Gotronic 49466 | 1 | 1 | 2 (quantity assumed, confirm) | [Gotronic product page](https://www.gotronic.fr/art-adapt--micro-usb-usb-c-48256.htm) | Replaces separate charging cable; captive cable on PSU. USB-C source activation with this adapter remains to verify; no higher-voltage PD trigger. |
 | Solder-joint insulation | Heat-shrink tubing already available at home | User stock | As needed | As needed | 0 to buy | — | User supplies tubing; no additional purchase. |
-| Battery connection accessories | Insulated battery lead adapter / terminal preparation as required | TBD | 0 | 1 set | 1 set | TBD | Verify battery connector and polarity; KF396 3.96 mm two-pole BAT IN terminal is the fallback. |
 | GNSS positioning | DFRobot Gravity TEL0157 | Farnell 4457334 | 1 | 1 | 2 | [Farnell product page](https://fr.farnell.com/en-FR/dfrobot/tel0157/gnss-module-i2c-uart-2m-3-3-to/dp/4457334) | One module per station; use I2C on DFR0848 with selector in I2C mode; Gravity 4P cable and GNSS antenna included; ensure male cable ends for female headers; firmware integration to define; retain Wio-E5 UART. |
 | Gateway LoRa antenna | MikroTik 868 Omni antenna, 6.5 dBi | GETIC / 868_Omni_antenna | Shared | Shared | 1 kit | [GETIC product page](https://www.getic.fr/product/mikrotik-868-omni-antenna) | External coverage upgrade; optional if internal antenna suffices after field tests. Kit includes SMA-female antenna, 1 m SMA-male to SMA-male cable and mount; no N–SMA adapter required. Connect to the LoRa SMA port with power off. |
 
-Project totals: **2 Pico 2 WH, 2 SEN0232, 2 Grove Wio-E5 and 1 Hammond enclosure to purchase (allocation TBD); 1 KIT0210 with its included solar panel/controller and 3 matched RS PRO cells; 1 DFR0559 and 1 BAK 18650CA-1S-3J battery**. The gateway and mounting tape are shared. Acoustic membranes remain TBD pending validated acoustic documentation.
+Project totals: **2 Pico 2 WH, 2 SEN0232, 2 Grove Wio-E5 and 1 Hammond enclosure to purchase (allocation TBD); 1 KIT0210 with its included solar panel/controller and 3 matched RS PRO cells; Station B powered directly by USB without a battery**. The gateway and mounting tape are shared. Acoustic membranes remain TBD pending validated acoustic documentation.
 
 Gateway antenna selection checked **2026-11-02**: [MikroTik manual](https://manual.mikrotik.com/hardware/wap-lr8g-kit/) confirms an internal 2 dBi LoRa antenna is included but disconnected by default; connect its cable to RFIO with power off to use it. The manufacturer suggests internal use for distances below approximately 1 km; actual urban coverage must be tested. External antenna purchase is not mandatory. One [868 Omni kit](https://mikrotik.com/product/868_omni_antenna) is retained as the selected external coverage upgrade, replacing the Alfa antenna; GETIC lists it in stock on the retrieved page, subject to re-check before ordering.
 
@@ -99,66 +96,32 @@ regulated 5 V output
 
 KIT0210 handles charging and solar/battery switchover. Its panel, controller, cables and PG7 glands are included. Use one M12 IP68 gland for the regulated 5 V cable entering the Hammond enclosure; do not purchase a second solar panel or controller.
 
-### Station B: USB-rechargeable battery-only
+### Station B: direct USB power
 
 ```text
-5 V USB charger
-       |
-       v
-DFRobot DFR0559 <----> 1S 3.7 V BAK battery (4.2 V fully charged)
-       |
-regulated 5 V output
-       |
-      1N5819
-       |
-       v
-   Pico 2 VSYS
+Raspberry Pi 5 USB-C PSU (base output 5.1 V)
+        |
+USB-C female to micro-USB male adapter
+        |
+Pico 2 WH micro-USB port
+        |
+onboard USB Schottky diode -> VSYS -> onboard 3.3 V regulator
 ```
 
-DFR0559 solar input is unused. Never connect the KIT0210 18 V panel to it: DFR0559 SOLAR IN is documented for 4.5–6 V, approximately 5 V panels, with a documented damage-limit warning of 6.5 V; stay within the 4.5–6 V operating range and never exceed that 6.5 V limit. [DFRobot specifications](https://wiki.dfrobot.com/dfr0559) and [input-voltage warning](https://wiki.dfrobot.com/dfr0559/docs/21586)
+Station B has no battery, solar panel, charge controller or external isolation diode. Use the existing DFR0848 expansion board and retain the common sensor, GNSS and Wio-E5 connections. It operates while USB power is present and stops when USB is disconnected. Verify that the selected adapter activates the PSU's 5 V output; do not use a higher-voltage PD trigger. [Pico 2 W power documentation](https://datasheets.raspberrypi.com/picow/pico-2-w-datasheet.pdf)
 
-DFR0559 supports one 3.7 V Li-ion/LiPo cell, a 5 V USB input, a regulated 5 V / 1 A output and a maximum battery charging current of 900 mA. It provides JST-PH2.0 and KF396 3.96 mm two-pole battery connectors. Battery protections cover overcharge, over-discharge, over-current and reverse polarity; regulated-output protections cover short circuit, over-current and over-temperature. These protections do not remove the requirement to respect battery temperature limits. [DFRobot connection and protection documentation](https://wiki.dfrobot.com/dfr0559/docs/21586)
-
-### Station B USB charging behavior
+### Pico and module power connections
 
 ```text
-During charging:
-USB 5 V
-   |
-   v
-DFR0559
-   +----> charges 1S battery
-   |
-   +----> regulated 5 V -> 1N5819 -> Pico VSYS
-
-Without USB:
-1S battery
-   |
-   v
-DFR0559 boost converter
-   |
-regulated 5 V
-   |
-  1N5819
-   |
-   v
-Pico VSYS
+Station A: KIT0210 regulated 5 V -> 1N5819 -> Pico VSYS
+Station B: USB PSU -> adapter -> Pico micro-USB (onboard diode to VSYS)
+Both: Pico 3V3 -> SEN0232
+Both: Wio-E5 and GNSS -> appropriate regulated rails per module requirements
+Both: common ground between Pico, SEN0232, GNSS and Wio-E5
+Station A: KIT0210 GND also joins common ground
 ```
 
-The application hardware and firmware must operate identically with USB charging power present or absent. Keep the regulated output enabled and verify uninterrupted station operation when connecting and disconnecting USB during power testing.
-
-### Common Pico power connection
-
-For both stations:
-
-```text
-power manager regulated 5 V -> 1N5819 -> Pico VSYS
-Pico 3V3 -> SEN0232
-Wio-E5 supply -> appropriate regulated rail per module requirements
-power manager GND = Pico GND = SEN0232 GND = Wio-E5 GND
-```
-
-Orient 1N5819 to conduct from the power manager toward VSYS: anode toward regulated 5 V, cathode (marked band) toward VSYS. Insulate solder joints and exposed leads with heat-shrink tubing. Do not feed external 5 V into Pico `3V3`. Never power the Pico directly from a raw solar panel or bare Li-ion cells. Each station's power manager handles battery charging and protection.
+On Station A, orient 1N5819 anode toward regulated 5 V and cathode (marked band) toward VSYS; insulate solder joints and exposed leads. Never feed external 5 V into Pico `3V3`. Never power the Pico directly from a raw solar panel or bare cells. KIT0210 handles charging and protection for Station A only.
 
 ## Pico pin allocation
 
@@ -258,42 +221,9 @@ The current cost-oriented candidate is:
 
 The previously considered Jauch LR1865HB is not the preferred option because of its high unit cost.
 
-### Station B: BAK 18650CA-1S-3J
+### Station B
 
-Use one BAK Technology `18650CA-1S-3J`, Farnell France `2401852`, with the DFR0559. Specifications from the [Farnell product page](https://fr.farnell.com/bak-technology/18650ca-1s-3j/batt-rechargeable-li-ion-3-7v/dp/2401852) and [battery datasheet](https://www.farnell.com/datasheets/1806910.pdf):
-
-| Parameter | Specification |
-|---|---|
-| Nominal voltage | 3.7 V (1S) |
-| Capacity | 2250 mAh |
-| Charge voltage | 4.2 V |
-| Maximum charge current | 2200 mA |
-| Maximum continuous discharge | 2200 mA |
-| Charging temperature | 0 °C to 45 °C |
-| Discharging temperature | -20 °C to 60 °C |
-| Diameter | 18.5 mm |
-| Length | 69 mm |
-| Weight | Approximately 50 g |
-| Termination | Connector; exact type unverified |
-
-The DFR0559 maximum charging current of **900 mA is below the battery's 2200 mA maximum**, so charger and battery are compatible with respect to charge current. Verify wiring and polarity separately; do not assume the battery connector is JST-PH2.0.
-
-If its connector is incompatible, use appropriately insulated leads with the DFR0559 KF396 3.96 mm two-pole terminal:
-
-```text
-battery + -> DFR0559 BAT IN +
-battery - -> DFR0559 BAT IN -
-```
-
-Verify polarity before connection. Identify any additional battery lead from the battery documentation; do not connect an unidentified lead to BAT IN. Keep the battery mechanically protected and shaded, and charge only within 0–45 °C.
-
-### Station B autonomy
-
-```text
-3.7 V × 2.25 Ah ≈ 8.3 Wh nominal
-```
-
-Actual autonomy depends primarily on continuous SEN0232 consumption, Pico consumption, the LoRa transmission interval, DFR0559 boost-converter efficiency, and battery temperature and aging. Do not specify a precise runtime until average station power consumption has been measured and conversion losses accounted for.
+No battery is installed. There are no battery capacity, charge-current, charging-temperature or battery-autonomy requirements for Station B. Firmware battery reporting must distinguish Station A's battery from Station B's USB supply; do not report a USB/VSYS measurement as battery voltage on B.
 
 ## Outdoor enclosure
 
@@ -387,7 +317,7 @@ Therefore:
 - reduce Pico power consumption where practical;
 - keep the LoRa radio asleep except during communication;
 - aggregate locally and transmit infrequently;
-- monitor battery voltage and report it with telemetry.
+- monitor battery voltage on Station A and report it with telemetry; Station B has no battery and must identify battery telemetry as unavailable without changing the common measurement and LoRaWAN architecture.
 
 Station A’s included 10 W solar panel is intentionally oversized relative to the average node consumption so that it can:
 
@@ -449,8 +379,8 @@ The server should convert the binary payload to JSON or database records after L
 For both stations:
 
 - never connect an 18 V solar panel directly to the Pico or a lithium battery;
-- use regulated 5 V through 1N5819 to Pico VSYS; never feed external 5 V into `3V3`;
-- retain common ground between the power manager, Pico, SEN0232 and Wio-E5;
+- use KIT0210 regulated 5 V through 1N5819 to VSYS on Station A, and the Pico micro-USB port on Station B; never feed external 5 V into `3V3`;
+- retain common ground between Pico and all modules, including the KIT0210 on Station A;
 - never charge lithium batteries outside their specified temperature range;
 - protect electronics, batteries and charging connections from rain and condensation;
 - do not assume an IP-rated enclosure automatically provides a valid acoustic path.
@@ -464,18 +394,16 @@ For Station A:
 
 For Station B:
 
-- use only one 1S 3.7 V Li-ion/LiPo battery, with 4.2 V maximum normal charging voltage;
-- use the DFR0559 charger and protection; never bypass its charger;
-- do not charge the selected BAK battery below 0 °C or above 45 °C; discharge only within -20–60 °C;
-- keep the battery mechanically protected and away from direct solar heating;
-- verify battery polarity before connecting BAT IN;
-- leave the DFR0559 solar input unused; never connect the KIT0210 18 V panel to it.
+- use the Pico micro-USB input with the selected PSU and adapter;
+- do not install a battery or charge controller;
+- verify adapter compatibility and the 5 V supply before connection;
+- protect the USB connection and modules against rain and condensation.
 
 ## Procurement notes
 
 Primary sourcing is Farnell where practical.
 
-Station A matched cells are sourced from RS; Station B uses the selected BAK battery from Farnell France.
+Station A matched cells are sourced from RS; Station B requires only USB power, without a battery or battery manager.
 
 Before ordering, re-check:
 
@@ -488,8 +416,6 @@ Before ordering, re-check:
 
 Stock status and pricing change over time and must not be hard-coded into firmware or project logic.
 
-New-part reference and availability check, **2026-10-11**: Farnell France lists [DFRobot DFR0559 / 3769962](https://fr.farnell.com/dfrobot/dfr0559/module-de-gestion-de-l-nergie/dp/3769962) and [BAK Technology 18650CA-1S-3J / 2401852](https://fr.farnell.com/bak-technology/18650ca-1s-3j/batt-rechargeable-li-ion-3-7v/dp/2401852) as in stock on the retrieved product pages. This is a dated procurement observation, not a permanent specification; re-check availability before ordering.
-
-Retain battery `2401852` unless unavailable. Any necessary substitute must be a documented 1S 3.7 V Li-ion/LiPo battery with maximum charging current at least 900 mA; document the unavailability and substitution reason, then verify temperature limits, dimensions, connector and polarity.
-
 Procurement update 2026-11-02: hookup wire and heat-shrink tubing are already available at the user’s home. Buy only one Hammond enclosure. Two Pi 5 PSU/adapter sets are provisionally allocated, pending quantity clarification; this is not a purchase record.
+
+Station B power decision: remove DFR0559 and BAK battery from the active BOM; reserve their previous component IDs HW-017/HW-018. Keep the existing USB PSUs/adapters and one-Hammond purchase plan.

@@ -28,18 +28,19 @@ Le circuit de mesure batterie doit être dimensionné selon la topologie et la p
 
 Ne jamais alimenter le Pico depuis le panneau brut ou des cellules nues. La charge et le passage solaire/batterie restent assurés par le KIT0210. Documenter également le branchement USB lors du développement.
 
-La diode retenue est une **1N5819 STMicroelectronics, axiale traversante DO-41, 1 A / 40 V**, adaptée à la soudure manuelle. Pour chaque station, relier l’anode au 5 V régulé du gestionnaire d’alimentation et la cathode (côté bague) à VSYS. Isoler les soudures et les pattes exposées avec de la gaine thermorétractable ; contrôler la tension VSYS en charge.
+La diode retenue est une **1N5819 STMicroelectronics, axiale traversante DO-41, 1 A / 40 V**, adaptée à la soudure manuelle. Pour la station A, relier l’anode au 5 V régulé du gestionnaire d’alimentation et la cathode (côté bague) à VSYS. Isoler les soudures et les pattes exposées avec de la gaine thermorétractable ; contrôler la tension VSYS en charge.
 
-## Recharge de la station B
+## Alimentation USB directe de la station B
 
 ```text
 Alimentation Raspberry Pi 5 SC1157, câble USB-C captif
   -> adaptateur USB-C femelle / micro-USB mâle
-  -> DFR0559 USB IN
-DFR0559 BAT IN <-> batterie BAK 1S 3.7 V
-DFR0559 sortie 5 V -> anode 1N5819 -> cathode côté bague -> Pico VSYS
+  -> port micro-USB du Pico 2 WH enfiché dans la DFR0848
+  -> alimentation des modules depuis les rails adaptés de la station
 ```
 
-L'adaptateur proposé est CAB55550 (Gotronic 49466). Vérifier qu'il active correctement la sortie 5 V du chargeur USB-C ; aucun déclencheur PD à tension supérieure ne doit être utilisé. Le branchement du chargeur sur le Pico ne recharge pas la batterie de la station B. Le KIT0210 de la station A possède une entrée USB-C utilisable directement, sans cet adaptateur.
+La station B ne possède ni pile, ni batterie, ni gestionnaire de charge. Le port micro-USB du Pico alimente VSYS via la diode déjà présente sur le Pico ; aucune 1N5819 externe n'est à ajouter sur ce trajet. Ne pas injecter le 5 V sur `3V3`. Conserver les masses communes du Pico, du SEN0232, du GPS et du Wio-E5. La station s'arrête lorsque l'alimentation USB est débranchée.
 
-Fil et gaine thermorétractable sont déjà disponibles chez l'utilisateur. La limite de charge du DFR0559 reste 900 mA, quelle que soit la puissance nominale du chargeur secteur. Respecter la plage de charge 0–45 °C de la batterie BAK.
+L'adaptateur proposé est CAB55550 (Gotronic 49466). Vérifier qu'il active correctement la sortie 5 V du chargeur USB-C ; aucun déclencheur PD à tension supérieure ne doit être utilisé. Le KIT0210 de la station A possède une entrée USB-C utilisable directement, sans cet adaptateur.
+
+Fil et gaine thermorétractable sont déjà disponibles chez l'utilisateur. La batterie et les essais de charge concernent uniquement la station A.
