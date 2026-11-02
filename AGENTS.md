@@ -9,7 +9,7 @@ The project contains exactly two complete sensing stations:
 - **Station A:** solar-powered, using one DFRobot KIT0210 and three matched RS PRO 18650 cells.
 - **Station B:** battery-only, using one DFRobot DFR0559 and one BAK Technology 1S 3.7 V battery, rechargeable through USB. No solar panel is fitted to Station B.
 
-Both stations retain the Raspberry Pi Pico 2, DFRobot SEN0232, Grove Wio-E5 EU868, DFR0848 expansion board and Hammond outdoor enclosure. Common sensing, LoRaWAN, enclosure and firmware decisions remain unchanged.
+Both stations use the Raspberry Pi Pico 2 WH (SC1634, presoldered headers), DFRobot SEN0232, Grove Wio-E5 EU868, DFR0848 expansion board and Hammond outdoor enclosure. Common sensing, LoRaWAN, enclosure and firmware decisions remain unchanged.
 
 Station A charges during daylight and continues on battery when solar power is unavailable. Station B operates from its battery and can continue measuring while USB charging power is connected.
 
@@ -19,7 +19,7 @@ Build quantity: **one solar station (A) and one USB-rechargeable battery-only st
 
 | Function | Part | Supplier / reference | Solar station qty | Battery-only station qty | Total qty | Product URL | Notes |
 |---|---|---|---:|---:|---:|---|---|
-| MCU | Raspberry Pi Pico 2 | Farnell 4531086 | 1 | 1 | 2 | [Farnell product page](https://fr.farnell.com/raspberry-pi/raspberry-pi-pico-2/carte-mcu-rpi-pico-2-520ko-150mhz/dp/4531086) | Main controller |
+| MCU | Raspberry Pi Pico 2 WH (SC1634), presoldered headers | Farnell 4667138 | 1 | 1 | 2 | [Farnell product page](https://fr.farnell.com/raspberry-pi/sc1634/rpi-pico-2w-brd-520kb-150mhz-w/dp/4667138) | Main controller; presoldered headers included; retain Wio-E5 for LoRaWAN. |
 | Pico IO expansion | DFRobot DFR0848 Gravity expansion board for Raspberry Pi Pico / Pico 2 | Farnell 4308193 | 1 | 1 | 2 | [Farnell product page](https://fr.farnell.com/dfrobot/dfr0848/carte-d-expansion-gravit-carte/dp/4308193) | Simplifies sensor and module connections; verify Pico pin headers, connector compatibility, enclosure fit, and power routing before assembly |
 | Sound-level sensor | DFRobot SEN0232 | Farnell 3517935 | 1 | 1 | 2 | [Farnell product page](https://fr.farnell.com/dfrobot/sen0232/sonom-tre-analogique-arduino/dp/3517935) | Analog output, 30–130 dBA nominal range |
 | LoRaWAN radio | Seeed Studio Grove Wio-E5, EU868 | Farnell 4007875 | 1 | 1 | 2 | [Farnell product page](https://fr.farnell.com/seeed-studio/113020091/module-lora-e5-carte-arduino-pi/dp/4007875) | UART/AT-command interface |
@@ -35,13 +35,17 @@ Build quantity: **one solar station (A) and one USB-rechargeable battery-only st
 | Grove connection cable | Seeed Studio 110990028, Grove 4-pin to female jumpers | Farnell 3932132 | 1 | 1 | 1 pack of 5 | [Farnell product page](https://fr.farnell.com/en-FR/seeed-studio/110990028/f-jumper-conversion-cable-4-pin/dp/3932132) | One cable per station for Wio-E5 and three spares; female jumpers fit 2.54 mm male headers; verify available headers and UART/power pinout |
 | USB-rechargeable power manager | DFRobot Solar Power Manager 5 V, DFR0559 | Farnell France 3769962 | 0 | 1 | 1 | [Farnell product page](https://fr.farnell.com/dfrobot/dfr0559/module-de-gestion-de-l-nergie/dp/3769962) | Station B only; USB 5 V charging; 1S 3.7 V battery; regulated 5 V / 1 A; maximum charging current 900 mA; solar input unused. |
 | Battery-only station battery | BAK Technology 18650CA-1S-3J, 3.7 V, 2250 mAh | Farnell France 2401852 | 0 | 1 | 1 | [Farnell product page](https://fr.farnell.com/bak-technology/18650ca-1s-3j/batt-rechargeable-li-ion-3-7v/dp/2401852) | Station B only; one 1S battery, 4.2 V charge voltage; connector type unverified; use BAT IN terminal fallback if needed. |
-| Pico headers | 2 × 20-pin male headers, 2.54 mm pitch, per Pico | TBD | 1 set | 1 set | 2 sets | TBD | Required for the selected Pico and expansion board; verify fit and whether headers are supplied before ordering separately. |
+| Pico headers | Presoldered headers included with Pico 2 WH | Included | 1 included set | 1 included set | 0 additional sets | Included with MCU | Do not order separate Pico headers; verify fit with DFR0848. |
 | Common wiring | Power, ground and sensor hookup wires / connectors | TBD | 1 set | 1 set | 2 sets | TBD | Finalize lengths and connectors for each enclosure; retain common ground and insulated connections. |
 | USB charger | Regulated 5 V USB charger | TBD | 0 | 1 | 1 | TBD | Station B DFR0559 USB input; size for concurrent charging and station load per manufacturer instructions. |
 | USB charging cable | USB cable compatible with DFR0559 USB input | TBD | 0 | 1 | 1 | TBD | Provide protected charging access; preserve enclosure sealing in outdoor operation. |
 | Battery connection accessories | Insulated battery lead adapter / terminal preparation as required | TBD | 0 | 1 set | 1 set | TBD | Verify battery connector and polarity; KF396 3.96 mm two-pole BAT IN terminal is the fallback. |
+| GNSS positioning | DFRobot Gravity TEL0157 | Farnell 4457334 | 1 | 1 | 2 | [Farnell product page](https://fr.farnell.com/en-FR/dfrobot/tel0157/gnss-module-i2c-uart-2m-3-3-to/dp/4457334) | One module per station; I2C/UART; wiring, power and firmware integration to define; retain Wio-E5 UART. |
+| Gateway LoRa antenna | MikroTik 868 Omni antenna, 6.5 dBi | GETIC / 868_Omni_antenna | Shared | Shared | 1 kit | [GETIC product page](https://www.getic.fr/product/mikrotik-868-omni-antenna) | External coverage upgrade; optional if internal antenna suffices after field tests. Kit includes SMA-female antenna, 1 m SMA-male to SMA-male cable and mount; no N–SMA adapter required. Connect to the LoRa SMA port with power off. |
 
-Project totals: **2 Pico 2, 2 SEN0232, 2 Grove Wio-E5 and 2 Hammond enclosures; 1 KIT0210 with its included solar panel/controller and 3 matched RS PRO cells; 1 DFR0559 and 1 BAK 18650CA-1S-3J battery**. The gateway and mounting tape are shared. Acoustic membranes remain TBD pending validated acoustic documentation.
+Project totals: **2 Pico 2 WH, 2 SEN0232, 2 Grove Wio-E5 and 2 Hammond enclosures; 1 KIT0210 with its included solar panel/controller and 3 matched RS PRO cells; 1 DFR0559 and 1 BAK 18650CA-1S-3J battery**. The gateway and mounting tape are shared. Acoustic membranes remain TBD pending validated acoustic documentation.
+
+Gateway antenna selection checked **2026-11-02**: [MikroTik manual](https://manual.mikrotik.com/hardware/wap-lr8g-kit/) confirms an internal 2 dBi LoRa antenna is included but disconnected by default; connect its cable to RFIO with power off to use it. The manufacturer suggests internal use for distances below approximately 1 km; actual urban coverage must be tested. External antenna purchase is not mandatory. One [868 Omni kit](https://mikrotik.com/product/868_omni_antenna) is retained as the selected external coverage upgrade, replacing the Alfa antenna; GETIC lists it in stock on the retrieved page, subject to re-check before ordering.
 
 ## Optional environmental sensor
 

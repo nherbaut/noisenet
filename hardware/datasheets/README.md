@@ -4,7 +4,7 @@ Enregistrer les liens officiels et, lorsque possible, les fiches techniques cons
 
 | Composant | Page fournisseur | Source fabricant | Document / version | Date de consultation | Points à vérifier |
 |---|---|---|---|---|---|
-| Pico 2 | [Farnell 4531086](https://fr.farnell.com/raspberry-pi/raspberry-pi-pico-2/carte-mcu-rpi-pico-2-520ko-150mhz/dp/4531086) | [Raspberry Pi — doc](https://datasheets.raspberrypi.com/pico/pico-2-datasheet.pdf) | À renseigner | — | VSYS, budget 3V3, ADC, niveaux GPIO |
+| Pico 2 WH (SC1634) | [Farnell 4667138](https://fr.farnell.com/raspberry-pi/sc1634/rpi-pico-2w-brd-520kb-150mhz-w/dp/4667138) | [Raspberry Pi — doc](https://datasheets.raspberrypi.com/picow/pico-2-w-datasheet.pdf) | À renseigner | — | VSYS, budget 3V3, ADC, niveaux GPIO |
 | DFR0848 | [Farnell 4308193](https://fr.farnell.com/dfrobot/dfr0848/carte-d-expansion-gravit-carte/dp/4308193) | [DFRobot — doc](https://wiki.dfrobot.com/dfr0848) | À renseigner | — | Barrettes Pico, connecteurs Gravity, encombrement, chemin d'alimentation |
 | SEN0232 | [Farnell 3517935](https://fr.farnell.com/dfrobot/sen0232/sonom-tre-analogique-arduino/dp/3517935) | [DFRobot — doc](https://wiki.dfrobot.com/sen0232/) | À renseigner | — | Alimentation, transfert tension/niveau sonore, consommation |
 | Grove Wio-E5 | [Farnell 4007875](https://fr.farnell.com/seeed-studio/113020091/module-lora-e5-carte-arduino-pi/dp/4007875) | [Seeed Studio — doc](https://wiki.seeedstudio.com/Grove_LoRa_E5_New_Version/) | À renseigner | — | Alimentation du module Grove, UART, veille, antenne |
@@ -18,3 +18,8 @@ Enregistrer les liens officiels et, lorsque possible, les fiches techniques cons
 | SEN0460 (option hors baseline) | [Farnell 3974148](https://fr.farnell.com/dfrobot/sen0460/module-capteur-de-qualit-de-l/dp/3974148) | [DFRobot — doc](https://wiki.dfrobot.com/sen0460) | À renseigner | — | I2C, alimentation, intégration si option retenue |
 
 Nom de fichier conseillé : `fabricant-modele-version.pdf`. Citer les pages pertinentes dans les décisions et comptes rendus.
+
+Références ajoutées à la nomenclature :
+
+- GNSS DFRobot TEL0157 : [Farnell 4457334](https://fr.farnell.com/en-FR/dfrobot/tel0157/gnss-module-i2c-uart-2m-3-3-to/dp/4457334), [documentation DFRobot](https://wiki.dfrobot.com/tel0157/). Un module par station ; intégration à définir.
+- Antenne de passerelle MikroTik `868_Omni_antenna` : [GETIC](https://www.getic.fr/product/mikrotik-868-omni-antenna), [documentation fabricant](https://mikrotik.com/product/868_omni_antenna). Un kit partagé : antenne 6,5 dBi SMA femelle, câble SMA mâle–mâle de 1 m et fixation inclus. Achat externe facultatif si l’antenne interne suffit après essais ; [manuel de la passerelle](https://manual.mikrotik.com/hardware/wap-lr8g-kit/).
