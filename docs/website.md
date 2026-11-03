@@ -2,9 +2,10 @@
 
 ## Construire et consulter
 
-Prérequis : Hugo 0.165.0 ou plus récent, Python 3 et Make. Aucun thème externe, Node.js ou module Python supplémentaire n'est nécessaire.
+Prérequis : Hugo 0.165.0 ou plus récent, Python 3 avec `venv`, et Make. Les bibliothèques de lecture/écriture Excel sont fixées dans `requirements-site.txt`. Aucun thème externe ni Node.js n’est nécessaire.
 
 ```bash
+make site-setup
 make site-build
 make site-serve
 ```
@@ -15,7 +16,9 @@ La configuration Hugo et les cibles Make utilisent toutes `public/` à la racine
 
 Le script `scripts/prepare-site.py` transforme les Markdown du projet en contenu Hugo et les quatre CSV de matériel en tableaux HTML avec téléchargement CSV. Les sources restent dans leurs emplacements habituels ; `.build/site/` et `public/` sont générés et ignorés par Git.
 
-La page de nomenclature propose aussi un CSV par fournisseur, généré depuis `hardware/bom.csv` à chaque compilation. Ces fichiers conservent les colonnes, références, quantités et unités de la BOM ; seules les lignes avec `quantity_to_order > 0` et un fournisseur renseigné sont exportées. Les articles déjà disponibles sont exclus des listes d'achat. Les composants sans fournisseur restent signalés sur la page et présents dans le CSV complet. Les exports sont dans `public/data/hardware/suppliers/` ; les conditionnements restent à respecter lors de la saisie des paniers, notamment un paquet de dix pour HW-012.
+La page de nomenclature propose un téléchargement par fournisseur, généré depuis `hardware/bom.csv` à chaque compilation. Farnell, GETIC et Gotronic utilisent des CSV qui conservent les colonnes, références, quantités et unités de la BOM. **RS utilise un véritable fichier Excel `.xls`, rempli depuis `templates/rs.xls`** : les notes, les huit en-têtes et la mise en page du modèle sont conservés, et les données commencent juste sous les en-têtes. La quantité provient de `quantity_to_order`, la référence RS de `supplier_reference`, la description de `model`, les informations fabricant de leurs colonnes et la référence interne de `component_id`. Le prix cible et le centre de coût restent vides. Les références RS sont écrites comme texte pour préserver leur zéro initial.
+
+Seules les lignes avec `quantity_to_order > 0` et un fournisseur renseigné sont exportées. Les articles déjà disponibles sont exclus des listes d'achat. Les composants sans fournisseur restent signalés sur la page et présents dans le CSV complet. Les exports sont dans `public/data/hardware/suppliers/` ; les conditionnements restent à respecter lors de la saisie des paniers, notamment un paquet de dix pour HW-012. Le workflow GitHub installe les dépendances Excel avec `make site-setup` avant compilation. Le BOM RS téléchargeable est `bom-rs.xls` ; aucun ancien export `bom-rs.csv` n'est conservé après une compilation propre.
 
 Dans les tableaux de matériel, cliquer sur un fabricant ouvre sa documentation et cliquer sur un fournisseur ouvre la page d'achat du composant. Les liens viennent des colonnes `documentation_url` et `product_url` de la BOM ; les URL inconnues restent sans lien.
 

@@ -30,6 +30,39 @@ def content_path(source):
     return source
 
 
+def rs_export(rows, destination):
+    """Fill the original RS Excel template, preserving its headings and layout."""
+    import xlrd
+    import xlwt
+    from xlutils.copy import copy
+
+    template = xlrd.open_workbook(ROOT / 'templates/rs.xls', formatting_info=True)
+    source = template.sheet_by_index(0)
+    headers = ['Quantity', 'RS Stock No', 'Description', 'Manufacturer Part. No.',
+               'Manufacturer name', 'Unit Target Price', 'Your Part No.', 'Cost Centre']
+    if source.row_values(3) != headers:
+        raise ValueError('Unexpected RS template columns in templates/rs.xls')
+    workbook = copy(template)
+    sheet = workbook.get_sheet(0)
+    text_style = xlwt.easyxf(num_format_str='@')
+    # Clear the template's example row, including when no items remain to order.
+    for column in range(len(headers)):
+        sheet.write(4, column, '', text_style)
+    for index, row in enumerate(rows, start=4):
+        quantity = Decimal(row['quantity_to_order'])
+        if quantity <= 0 or quantity != quantity.to_integral_value():
+            raise ValueError(f'RS requires a positive whole quantity: {row["component_id"]}')
+        values = [int(quantity), row['supplier_reference'], row['model'],
+                  row['manufacturer_reference'], row['manufacturer'], '',
+                  row['component_id'], '']
+        for column, value in enumerate(values):
+            if column == 0:
+                sheet.write(index, column, value)
+            else:
+                sheet.write(index, column, value, text_style)
+    workbook.save(str(destination))
+
+
 def supplier_exports(dataset):
     """Export positive purchase quantities, preserving BOM units and references."""
     groups = {}
@@ -45,14 +78,19 @@ def supplier_exports(dataset):
     downloads = []
     for supplier, rows in sorted(groups.items()):
         slug = re.sub(r'[^a-z0-9]+', '-', supplier.lower()).strip('-')
-        relative = f'data/hardware/suppliers/bom-{slug}.csv'
+        extension = 'xls' if supplier == 'RS' else 'csv'
+        relative = f'data/hardware/suppliers/bom-{slug}.{extension}'
         destination = OUTPUT / 'static' / relative
         destination.parent.mkdir(parents=True, exist_ok=True)
-        with destination.open('w', encoding='utf-8', newline='') as handle:
-            writer = csv.DictWriter(handle, fieldnames=dataset['fields'], lineterminator='\n')
-            writer.writeheader()
-            writer.writerows(rows)
-        downloads.append({'supplier': supplier, 'path': relative, 'count': len(rows)})
+        if supplier == 'RS':
+            rs_export(rows, destination)
+        else:
+            with destination.open('w', encoding='utf-8', newline='') as handle:
+                writer = csv.DictWriter(handle, fieldnames=dataset['fields'], lineterminator='\n')
+                writer.writeheader()
+                writer.writerows(rows)
+        downloads.append({'supplier': supplier, 'path': relative, 'count': len(rows),
+                          'format': extension.upper()})
     dataset['supplier_downloads'] = downloads
     dataset['unassigned_components'] = unassigned
 

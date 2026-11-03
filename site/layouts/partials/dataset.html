@@ -9,7 +9,7 @@
   <h2>Télécharger par fournisseur</h2>
   <p>Articles à acheter uniquement. Vérifier les unités et conditionnements avant de remplir le panier.</p>
   <ul>
-    {{ range . }}<li><a href="{{ .path | relURL }}" download>BOM {{ .supplier }} (CSV)</a> · {{ .count }} référence(s)</li>{{ end }}
+    {{ range . }}<li><a href="{{ .path | relURL }}" download>BOM {{ .supplier }} ({{ .format }})</a> · {{ .count }} référence(s)</li>{{ end }}
   </ul>
 </section>
 {{ end }}

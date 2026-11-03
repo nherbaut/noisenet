@@ -1,19 +1,24 @@
 HUGO ?= hugo
-PYTHON ?= python3
+PYTHON ?= $(if $(wildcard .venv/bin/python),.venv/bin/python,python3)
 BASE_URL ?= http://localhost:1313/
 PORT ?= 1313
 GH ?= gh
 GITHUB_REPO ?= nherbaut/noisenet
 DEPLOY_REF ?= main
 
-.PHONY: help site-prepare site-build site-serve site-check site-deploy push
+.PHONY: help site-setup site-prepare site-build site-serve site-check site-deploy push
 
 help:
+	@echo "make site-setup                         Install site dependencies in .venv/"
 	@echo "make site-build                         Build the website in public/"
 	@echo "make site-serve                         Preview at http://localhost:1313/"
 	@echo "make site-check                         Build and check internal links"
 	@echo "make site-deploy                        Trigger GitHub Pages deployment (DEPLOY_REF=main)"
 	@echo "make site-build BASE_URL=https://USER.github.io/REPO/"
+
+site-setup:
+	python3 -m venv .venv
+	.venv/bin/python -m pip install -r requirements-site.txt
 
 site-prepare:
 	$(PYTHON) scripts/prepare-site.py

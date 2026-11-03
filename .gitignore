@@ -8,6 +8,7 @@ config/local/
 # Sorties de compilation et outils
 build/
 .build/
+.venv/
 public/
 site/resources/
 site/.hugo_build.lock
