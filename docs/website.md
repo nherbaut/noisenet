@@ -15,6 +15,8 @@ La configuration Hugo et les cibles Make utilisent toutes `public/` à la racine
 
 Le script `scripts/prepare-site.py` transforme les Markdown du projet en contenu Hugo et les quatre CSV de matériel en tableaux HTML avec téléchargement CSV. Les sources restent dans leurs emplacements habituels ; `.build/site/` et `public/` sont générés et ignorés par Git.
 
+La page de nomenclature propose aussi un CSV par fournisseur, généré depuis `hardware/bom.csv` à chaque compilation. Ces fichiers conservent les colonnes, références, quantités et unités de la BOM ; seules les lignes avec `quantity_to_order > 0` et un fournisseur renseigné sont exportées. Les articles déjà disponibles sont exclus des listes d'achat. Les composants sans fournisseur restent signalés sur la page et présents dans le CSV complet. Les exports sont dans `public/data/hardware/suppliers/` ; les conditionnements restent à respecter lors de la saisie des paniers, notamment un paquet de dix pour HW-012.
+
 Dans les tableaux de matériel, cliquer sur un fabricant ouvre sa documentation et cliquer sur un fournisseur ouvre la page d'achat du composant. Les liens viennent des colonnes `documentation_url` et `product_url` de la BOM ; les URL inconnues restent sans lien.
 
 Après modification d'un Markdown ou CSV, relancer `make site-prepare` dans un autre terminal pour actualiser l'aperçu. Hugo surveille ensuite les fichiers générés. Les modifications des templates et du CSS sont prises en compte directement.

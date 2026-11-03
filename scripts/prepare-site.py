@@ -4,6 +4,7 @@ import csv
 import json
 import re
 import shutil
+from decimal import Decimal
 from pathlib import Path
 from urllib.parse import urlsplit, urlunsplit
 
@@ -27,6 +28,33 @@ def content_path(source):
     if source.name == 'README.md':
         return source.parent / '_index.md'
     return source
+
+
+def supplier_exports(dataset):
+    """Export positive purchase quantities, preserving BOM units and references."""
+    groups = {}
+    unassigned = []
+    for row in dataset['rows']:
+        if Decimal(row['quantity_to_order']) <= 0:
+            continue
+        supplier = row['supplier'].strip()
+        if not supplier or supplier.upper() == 'TBD':
+            unassigned.append(row['component_id'])
+            continue
+        groups.setdefault(supplier, []).append(row)
+    downloads = []
+    for supplier, rows in sorted(groups.items()):
+        slug = re.sub(r'[^a-z0-9]+', '-', supplier.lower()).strip('-')
+        relative = f'data/hardware/suppliers/bom-{slug}.csv'
+        destination = OUTPUT / 'static' / relative
+        destination.parent.mkdir(parents=True, exist_ok=True)
+        with destination.open('w', encoding='utf-8', newline='') as handle:
+            writer = csv.DictWriter(handle, fieldnames=dataset['fields'], lineterminator='\n')
+            writer.writeheader()
+            writer.writerows(rows)
+        downloads.append({'supplier': supplier, 'path': relative, 'count': len(rows)})
+    dataset['supplier_downloads'] = downloads
+    dataset['unassigned_components'] = unassigned
 
 
 def route(source):
@@ -98,6 +126,7 @@ def prepare():
         destination = OUTPUT / 'static/data' / source
         destination.parent.mkdir(parents=True, exist_ok=True)
         shutil.copyfile(ROOT / source, destination)
+    supplier_exports(datasets['bom'])
     write(OUTPUT / 'data/hardware.json', json.dumps(datasets, ensure_ascii=False, indent=2))
     components = {row['component_id']: row for name in ('bom', 'optional-bom')
                   for row in datasets[name]['rows']}
