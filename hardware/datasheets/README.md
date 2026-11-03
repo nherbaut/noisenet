@@ -27,3 +27,5 @@ Références ajoutées à la nomenclature :
 - Câble Wio-E5 vers DFR0848 : Seeed Studio `110990210`, Grove vers Dupont **mâles**, [Farnell 3410135, lot de cinq](https://fr.farnell.com/en-FR/seeed-studio/110990210/cable-4-pin-male-jumper-grove/dp/3410135), [fiche technique](https://www.farnell.com/datasheets/3681572.pdf).
 
 - Capteur environnemental Grove BME280 Seeed Studio `101020193` : [Farnell 3932095](https://fr.farnell.com/seeed-studio/101020193/carte-capteur-carte-arduino/dp/3932095), [documentation fabricant](https://wiki.seeedstudio.com/Grove-Barometer_Sensor-BME280/). Deux unités ; vérifier raccordement I2C à 3.3 V et exposition à l’air ambiant à l’abri de la pluie.
+
+- Câbles de programmation Pico : Multicomp `MC002726`, [Farnell 2907949](https://fr.farnell.com/multicomp/mc002726/usb-cord-2-0-plug-a-micro-b-3/dp/2907949), USB 2.0 A mâle vers micro-B mâle, 1 m, données et alimentation. Deux unités.
