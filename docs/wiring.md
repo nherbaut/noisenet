@@ -41,6 +41,6 @@ Alimentation Raspberry Pi 5 SC1157, câble USB-C captif
 
 La station B ne possède ni pile, ni batterie, ni gestionnaire de charge. Le port micro-USB du Pico alimente VSYS via la diode déjà présente sur le Pico ; aucune 1N5819 externe n'est à ajouter sur ce trajet. Ne pas injecter le 5 V sur `3V3`. Conserver les masses communes du Pico, du SEN0232, du GPS et du Wio-E5. La station s'arrête lorsque l'alimentation USB est débranchée.
 
-L'adaptateur proposé est CAB55550 (Gotronic 49466). Vérifier qu'il active correctement la sortie 5 V du chargeur USB-C ; aucun déclencheur PD à tension supérieure ne doit être utilisé. Le KIT0210 de la station A possède une entrée USB-C utilisable directement, sans cet adaptateur.
+L’adaptateur prévu est CAB55550, avec fournisseur à sélectionner. Vérifier qu'il active correctement la sortie 5 V du chargeur USB-C ; aucun déclencheur PD à tension supérieure ne doit être utilisé. Le KIT0210 de la station A possède une entrée USB-C utilisable directement, sans cet adaptateur.
 
 Fil et gaine thermorétractable sont déjà disponibles chez l'utilisateur. La batterie et les essais de charge concernent uniquement la station A.
